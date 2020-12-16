@@ -76,7 +76,7 @@ class CityController extends Controller
     public function update(CityRequest $request, City $city)
     {
         $city->update($request->validated());
-        return redirect()->back()->with('success', 'City Updated.');
+        return redirect()->route('cities.index')->with('success', 'City Updated.');
     }
 
     /**

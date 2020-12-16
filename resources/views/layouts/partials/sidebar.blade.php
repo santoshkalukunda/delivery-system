@@ -10,6 +10,10 @@
             <li class="heading">FEATURES</li>
          
             <li>
+                <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-code-branch"></i>
+                    <span class="nav-label">Branches</span></a>
+            </li>
+            <li>
                 <a href="{{route('cities.index')}}"><i class="sidebar-item-icon fa fa-map-marker"></i>
                     <span class="nav-label">Cities</span></a>
             </li>
