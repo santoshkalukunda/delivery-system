@@ -20,3 +20,5 @@
     <script src="{{asset('./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript">
     </script>
     <script src="{{asset('assets/js/app.min.js')}}" type="text/javascript"></script>
+    @stack('scripts')
+    @livewireScripts

@@ -15,3 +15,5 @@
     <!-- THEME STYLES-->
     <link href="{{asset('assets/css/main.min.css')}}" rel="stylesheet" />
     <!-- PAGE LEVEL STYLES-->
+    @stack('style')
+    @livewireStyles
