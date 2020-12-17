@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,4 @@ Route::view('dashbord', 'dashbord');
 
 Route::resource('cities', CityController::class);
 Route::resource('branches', BranchController::class);
+Route::resource('customers', CustomerController::class);
