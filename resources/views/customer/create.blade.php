@@ -10,7 +10,7 @@ Dashbord
                 <div class="ibox-title">Customer Form</div>
             </div>
             <div class="ibox-body">
-                <form action="" method="post">
+                <form action="{{route('customers.store')}}" method="get">
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-4">
@@ -35,7 +35,7 @@ Dashbord
                         </div>
                         <div class="col-md-4 form-group">
                             <label for="">City</label>
-                            <select  class="selectpicker form-control" data-live-search="true" >
+                            <select  class="selectpicker form-control" data-live-search="true" data-size="5">
                                 <option value="" selected>Select City</option>
                                 @foreach ($cities as $city)
                                     <option value="{{$city->id}}" data-subtext="{{$city->provinces}}" > {{$city->name}}</option>
