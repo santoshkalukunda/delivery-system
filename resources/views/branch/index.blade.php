@@ -15,11 +15,11 @@ Dashbord
                     @if ($branch->id)
                     @method('put')
                     @endif
-                    <div class="md-form">
+                    <div class="form-group">
+                        <label for="name">Name Branch</label>
                         <input type="text" id="name" name="name"
                             class="form-control @error('name') is-invalid @enderror"
-                            value="{{old('name',$branch->name)}}">
-                        <label for="name">Name Branch</label>
+                            value="{{old('name',$branch->name)}}" placeholder="Branch Name">
                         @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}

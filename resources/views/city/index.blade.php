@@ -15,7 +15,7 @@ Dashbord
                     @if ($city->id)
                     @method('put')
                     @endif
-                    <div class="">
+                    <div class="form-group">
                         <label for="provinces">Provinces</label>
                         <select class="browser-default custom-select @error('provinces') is-invalid @enderror"
                             name="provinces">
@@ -31,20 +31,20 @@ Dashbord
                         </div>
                         @enderror
                     </div>
-                    <div class="md-form">
+                    <div class="form-group">
+                        <label for="name">Name City</label>
                         <input type="text" id="name" name="name"
                             class="form-control @error('name') is-invalid @enderror"
-                            value="{{old('name',$city->name)}}">
-                        <label for="name">Name City</label>
+                            value="{{old('name',$city->name)}}" placeholder="City Name">
                         @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                         @enderror
                     </div>
-                    <div>
+                    <div class="form-group">
                         <button type="submit"
-                            class="btn btn-success btn-rounded">{{$city->id ? "upadete" : "Add"}}</button>
+                            class="btn btn-success form-control btn-rounded">{{$city->id ? "upadete" : "Add"}}</button>
                     </div>
                 </form>
             </div>
