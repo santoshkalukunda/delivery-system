@@ -8,7 +8,14 @@
                 </a>
             </li>
             <li class="heading">FEATURES</li>
-         
+            <li>
+                <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-shopping-cart"></i>
+                    <span class="nav-label">Product Order</span></a>
+            </li>
+            <li>
+                <a href="{{route('customers.index')}}"><i class="sidebar-item-icon fa fa-user-friends"></i>
+                    <span class="nav-label">Customers</span></a>
+            </li>
             <li>
                 <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-code-branch"></i>
                     <span class="nav-label">Branches</span></a>

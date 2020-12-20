@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerRequest;
 use App\Models\City;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-       
+        $customers = Customer::with('city')->latest()->paginate(20);
+        return view('customer.index', compact('customers'));
     }
 
     /**
@@ -23,10 +25,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Customer $customer = null)
     {
-        $cities=City::orderBy('name')->get();
-        return view('customer.create',compact('cities'));
+        if (!$customer) {
+            $customer = new Customer;
+        }
+        $cities = City::orderBy('name')->get();
+        return view('customer.create', compact('cities', 'customer'));
     }
 
     /**
@@ -35,9 +40,11 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+
+        $customer = Customer::create($request->validated());
+        return redirect()->route('customers.show', $customer)->with('success', 'Customer Created.');
     }
 
     /**
@@ -48,7 +55,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -59,7 +66,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return $this->create($customer);
     }
 
     /**
@@ -69,9 +76,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->validated());
+        return redirect()->route('customers.show', $customer)->with('success', 'Customer Updated.');
     }
 
     /**
@@ -82,6 +90,19 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        return redirect()->back()->with('success', 'Customer Deleted');
+    }
+    public function view()
+    {
+        return view('customer.find');
+    }
+    public function find(Request $request)
+    {
+        $customer=Customer::where('contact',$request->contact)->first();
+        if($customer){
+            return redirect()->route('customers.show', $customer);
+        }
+        return redirect()->route('customers.create', $customer);
     }
 }

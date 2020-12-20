@@ -61,8 +61,8 @@ Dashbord
                         <span>Total Record: {{$cities->total()}}</span>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
+                <table class="table table-hover">
+                    <thead class="bg-dark-light">
                         <tr>
                             <th>Provinces</th>
                             <th>City</th>

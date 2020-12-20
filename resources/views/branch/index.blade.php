@@ -26,9 +26,9 @@ Dashbord
                         </div>
                         @enderror
                     </div>
-                    <div>
+                    <div class="form-group">
                         <button type="submit"
-                            class="btn btn-success btn-rounded">{{$branch->id ? "upadete" : "Add"}}</button>
+                            class="btn btn-success form-control btn-rounded">{{$branch->id ? "upadete" : "Add"}}</button>
                     </div>
                 </form>
             </div>

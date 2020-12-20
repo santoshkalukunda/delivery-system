@@ -10,13 +10,16 @@ Dashbord
                 <div class="ibox-title">Customer Form</div>
             </div>
             <div class="ibox-body">
-                <form action="{{route('customers.store')}}" method="get">
+                <form action="{{$customer->id ? route('customers.update',$customer) : route('customers.store')}}" method="post">
                     @csrf
+                    @if ($customer->id)
+                    @method('put')
+                    @endif
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="number">Contact number</label>
-                            <input type="text" id="number" name="contact"
-                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact')}}" placeholder="98XXXXXXXX">
+                            <label for="number" class="required">Contact number</label>
+                            <input type="tel" id="number" name="contact"
+                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->contact)}}" placeholder="98XXXXXXXX">
                             @error('contact')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -24,9 +27,9 @@ Dashbord
                             @enderror
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="name">Customer Name</label>
+                            <label for="name" class="required">Customer Name</label>
                             <input type="text" id="name" name="name"
-                                class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}" placeholder="Name">
+                                class="form-control @error('name') is-invalid @enderror" value="{{old('name',$customer->name)}}" placeholder="Name">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -34,11 +37,11 @@ Dashbord
                             @enderror
                         </div>
                         <div class="col-md-4 form-group">
-                            <label for="">City</label>
-                            <select  class="selectpicker form-control" data-live-search="true" data-size="5">
+                            <label for="city" class="required">City</label>
+                            <select  class="selectpicker form-control @error('city_id') is-invalid @enderror" name="city_id"   id="city" data-live-search="true" data-size="5">
                                 <option value="" selected>Select City</option>
                                 @foreach ($cities as $city)
-                                    <option value="{{$city->id}}" data-subtext="{{$city->provinces}}" > {{$city->name}}</option>
+                                    <option value="{{$city->id}}" data-subtext="{{$city->provinces}}" {{$city->id == $customer->city_id ? 'selected' : ''}}> {{$city->name}}</option>
                                 @endforeach
                               </select>
                             {{-- <select class="custom-select">
@@ -50,7 +53,7 @@ Dashbord
                                 </option>
                                 @endforeach
                             </select> --}}
-                            @error('city')
+                            @error('city_id')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -59,7 +62,7 @@ Dashbord
                         <div class="form-group col-md-4">
                             <label for="email">Email Address</label>
                             <input type="text" id="email" name="email"
-                                class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" placeholder="example@domain.com">
+                                class="form-control @error('email') is-invalid @enderror" value="{{old('email',$customer->email)}}" placeholder="example@domain.com">
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -70,18 +73,18 @@ Dashbord
                         <div class="col-md-4 form-group">
                             <label for="address">Address</label>
                             <input type="text" id="address" name="address"
-                                class="form-control @error('address') is-invalid @enderror" value="{{old('address')}}" placeholder="Address">
+                                class="form-control @error('address') is-invalid @enderror" value="{{old('address',$customer->address)}}" placeholder="Address">
                             @error('address')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-12">
                             <label for="details">Other details</label>
                             <textarea type="text" id="details" name="details"
                                 class="form-control  @error('details') is-invalid @enderror"
-                                value="{{old('details')}}" rows="2" placeholder="Details..."></textarea>
+                            rows="2" placeholder="Details...">{{old('details',$customer->details)}}</textarea>
                             @error('details')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -100,4 +103,11 @@ Dashbord
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    window.onload = function() {
+        CKEDITOR.replace( 'details' );
+    };
+</script>
+@endpush
 @endsection

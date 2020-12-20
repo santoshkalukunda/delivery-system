@@ -6,8 +6,7 @@ use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Customer extends Model
+class ProductOrder extends Model
 {
     use HasFactory;
     use Uuid;          
