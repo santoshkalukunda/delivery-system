@@ -37,4 +37,7 @@ class Customer extends Model
     {
         return $this->belongsTo(City::class);
     }
+    public function productOrder(){
+        return $this->hasMany(ProductOrder::class);
+    }
 }

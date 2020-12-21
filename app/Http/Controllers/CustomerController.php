@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CustomerRequest;
+use App\Models\Branch;
 use App\Models\City;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -55,7 +56,11 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('customer.show', compact('customer'));
+        $branches=Branch::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        // return view('customer.show', compact('customer','cities','branches'));
+        // return view('product-order.create', compact('customer','cities','branches'));
+        return redirect()->route('product-orders.create',$customer);
     }
 
     /**

@@ -14,6 +14,9 @@ class City extends Model
     public function customer(){
         return $this->hasMany(Customer::class);
     }
+    public function productOrder(){
+        return $this->hasMany(ProductOrder::class);
+    }
     
 }
 

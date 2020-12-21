@@ -11,7 +11,7 @@ Dashbord
                     <div class="ibox-title">Product Order</div>
                 </div>
                 <div class="ibox-body">
-                    <livewire:product-form :customer=$customer />
+                    <livewire:product-order-form :customer=$customer />
                 </div>
             </div>
         </div>

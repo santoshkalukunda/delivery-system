@@ -17,7 +17,7 @@ Dashbord
                         <label for="contact">Customer Contact No.</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" name="contact" id="contact" placeholder="Costumer Contact" autofocus>
+                        <input type="tel" class="form-control" name="contact" id="contact" placeholder="Costumer Contact" autofocus required>
                     </div>
                     <div class="col-md-2">
                         <button type="submit" class="btn btn-primary">Proceed</button>

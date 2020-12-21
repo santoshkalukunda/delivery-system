@@ -1,13 +1,13 @@
 <div>
-    <form action="" method="post">
+    <form wire:submit.prevent="save">
         <fieldset class="border p-2">
             <legend  class="w-auto">Shipping Details</legend>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="number" class="required">Contact number</label>
-                        <input type="tel" id="number" name="contact"
-                            class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->contact)}}" placeholder="98XXXXXXXX">
-                        @error('contact')
+                        <input wire:model.defer="order.contact" type="tel" id="number" name="contact"
+                            class="form-control @error('order.contact') is-invalid @enderror" value="{{old('order.contact',$customer->contact)}}" placeholder="98XXXXXXXX">
+                        @error('order.contact')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -15,9 +15,9 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="name" class="required">Customer Name</label>
-                        <input type="text" id="name" name="name"
-                            class="form-control @error('name') is-invalid @enderror" value="{{old('name',$customer->name)}}" placeholder="Name">
-                        @error('name')
+                        <input wire:model.defer="order.name" type="text" id="name" name="name"
+                            class="form-control @error('order.name') is-invalid @enderror" value="{{old('order.name',$customer->name)}}" placeholder="Name">
+                        @error('order.name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -25,14 +25,14 @@
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="city" class="required">City</label>
-                        <select  class="selectpicker form-control @error('city_id') is-invalid @enderror" name="city_id"   id="city" data-live-search="true" data-size="5">
+                        <select wire:model.defer="order.city_id"   class="selectpicker form-control @error('order.city_id') is-invalid @enderror" name="city_id"   id="city" data-live-search="true" data-size="5">
                             <option value="" selected>Select City</option>
                             @foreach ($cities as $city)
                                 <option value="{{$city->id}}" data-subtext="{{$city->provinces}}" {{$city->id == $customer->city_id ? 'selected' : ''}}> {{$city->name}}</option>
                             @endforeach
                           </select>
                        
-                        @error('city_id')
+                        @error('order.city_id')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -40,9 +40,9 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="email">Email Address</label>
-                        <input type="text" id="email" name="email"
-                            class="form-control @error('email') is-invalid @enderror" value="{{old('email',$customer->email)}}" placeholder="example@domain.com">
-                        @error('email')
+                        <input wire:model.defer="order.email"  type="text" id="email" name="email"
+                            class="form-control @error('order.email') is-invalid @enderror" value="{{old('order.email',$customer->email)}}" placeholder="example@domain.com">
+                        @error('order.email')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -51,9 +51,9 @@
                   
                     <div class="col-md-4 form-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" name="address"
-                            class="form-control @error('address') is-invalid @enderror" value="{{old('address',$customer->address)}}" placeholder="Address">
-                        @error('address')
+                        <input wire:model.defer="order.address"  type="text" id="address" name="address"
+                            class="form-control @error('order.address') is-invalid @enderror" value="{{old('order.address',$customer->address)}}" placeholder="Address">
+                        @error('order.address')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -66,9 +66,9 @@
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label for="date" class="required">Order Date</label>
-                    <input type="date" name="order_date" class="form-control @error('contact') is-invalid @enderror"
+                    <input wire:model.defer="order.date"  type="date" name="date" class="form-control @error('order.date') is-invalid @enderror"
                         id="date">
-                    @error('order_date')
+                    @error('order.date')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="branch_id" class="required">Branch</label>
-                    <select class="form-control @error('branch_id') is-invalid @enderror" name="branch_id"
+                    <select wire:model.defer="order.branch_id" class="form-control @error('order.branch_id') is-invalid @enderror" name="branch_id"
                         id="branch_id">
                         <option value="" selected>Select Branch</option>
                         @foreach ($branches as $branch)
@@ -84,7 +84,7 @@
                             {{$branch->name}}</option>
                         @endforeach
                     </select>
-                    @error('branch_id')
+                    @error('order.branch_id')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -92,9 +92,9 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="code" class="required">Product Code</label>
-                    <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" id="code"
+                    <input wire:model.defer="order.code" type="text" name="code" class="form-control @error('order.code') is-invalid @enderror" id="code"
                         placeholder="Product Code">
-                    @error('code')
+                    @error('order.code')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -102,9 +102,9 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="name" class="required">Product Name</label>
-                    <input type="text" name="product_name" class="form-control @error('name') is-invalid @enderror" id="name"
+                    <input wire:model.defer="order.product_name" type="text" name="product_name" class="form-control @error('order.product_name') is-invalid @enderror" id="name"
                         placeholder="Product Name">
-                    @error('name')
+                    @error('order.product_name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -112,9 +112,9 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="quantity" class="required">Product Quantity</label>
-                    <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror"
+                    <input wire:model.defer="order.quantity" type="text" name="quantity" class="form-control @error('order.quantity') is-invalid @enderror"
                         id="quantity" placeholder="Product Quntity with unit.">
-                    @error('quantity')
+                    @error('order.quantity')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -122,9 +122,9 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="price" class="required">Product Price</label>
-                    <input type="number" name="price" class="form-control @error('price') is-invalid @enderror"
+                    <input wire:model.defer="order.price" type="number" name="price" class="form-control @error('order.price') is-invalid @enderror"
                         id="price" min="0" placeholder="Product price in Rs.">
-                    @error('price')
+                    @error('order.price')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -132,28 +132,29 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="payment_status" class="required">Payment Status</label>
-                    <select type="number" name="payment_status"
-                        class="form-control @error('payment_status') is-invalid @enderror" id="payment_status">
+                    <select wire:model.defer="order.payment_status" type="number" name="payment_status"
+                        class="form-control @error('order.payment_status') is-invalid @enderror" id="payment_status">
                         <option value="">Select...</option>
                         <option value="0">Cash on delivery</option>
                         <option value="1">Paid</option>
                     </select>
-                    @error('payment_status')
+                    @error('order.payment_status')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
                 <div class="col-md-4 form-group">
-                    <label for="payment_status" class="required">Status</label>
-                    <select type="number" name="status"
-                        class="form-control @error('status') is-invalid @enderror" id="status">
-                        <option value="confirm">Confirm</option>
+                    <label for="status" class="required">Status</label>
+                    <select wire:model.defer="order.status" type="number" name="status"
+                        class="form-control @error('order.status') is-invalid @enderror" id="status">
+                        <option value="">selcet</option>
+                        <option value="confirmed">Confirm</option>
                         <option value="shipping">Shipping</option>
                         <option value="delivery">Delivery</option>
                         <option value="not-delivery">Not-Delivery</option>
                     </select>
-                    @error('status')
+                    @error('order.status')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -161,7 +162,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="user_id">Delivery Agent</label>
-                    <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
+                    <select wire:model.defer="order.user_id" class="form-control @error('order.user_id') is-invalid @enderror" name="user_id"
                         id="user_id">
                         <option value="" selected>Select Delivery Agent</option>
                         {{-- @foreach ($branches as $branch)
@@ -169,7 +170,7 @@
                             {{$branch->name}}</option>
                         @endforeach --}}
                     </select>
-                    @error('branch_id')
+                    @error('order.branch_id')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -177,9 +178,9 @@
                 </div>
                 <div class="col-md-12 form-group">
                     <label for="details">Product details</label>
-                    <textarea type="text" name="details" class="form-control @error('details') is-invalid @enderror"
-                        id="details" placeholder="Product details with unit."></textarea>
-                    @error('details')
+                    <textarea wire:model.defer="order.details" type="text" class="form-control @error('order.details') is-invalid @enderror"
+                         placeholder="Product details with unit."></textarea>
+                    @error('order.details')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -196,11 +197,4 @@
         </fieldset>
 
     </form>
-    @push('scripts')
-    <script>
-        window.onload = function() {
-                   CKEDITOR.replace( 'details' );
-               };
-    </script>
-    @endpush
 </div>

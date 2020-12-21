@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductOrderRequest;
+use App\Models\Branch;
+use App\Models\City;
+use App\Models\Customer;
 use App\Models\ProductOrder;
 use Illuminate\Http\Request;
 
@@ -14,7 +18,8 @@ class ProductOrderController extends Controller
      */
     public function index()
     {
-        //
+        $productOrders=ProductOrder::with('customer','city','user','branch')->latest()->get();
+        return view('product-order.index',compact('productOrders'));
     }
 
     /**
@@ -22,9 +27,11 @@ class ProductOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Customer $customer)
     {
-        //
+        $branches = Branch::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        return view('product-order.create', compact('customer', 'cities', 'branches'));
     }
 
     /**
@@ -33,9 +40,11 @@ class ProductOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductOrderRequest $request, Customer $customer)
     {
-        //
+        $product_order = new ProductOrder($request->validated());
+        $customer->productOrder()->save($product_order);
+        return redirect()->back()->with('success', 'New Order created');
     }
 
     /**

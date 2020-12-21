@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductOrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +31,9 @@ Route::view('dashbord', 'dashbord');
 Route::resource('cities', CityController::class);
 Route::resource('branches', BranchController::class);
 Route::get('customers/find', [CustomerController::class,'view'])->name('customers.view');
-Route::post('customers/find', [CustomerController::class,'find'])->name('customers.find');
+Route::get('customers/find', [CustomerController::class,'find'])->name('customers.find');
 Route::resource('customers', CustomerController::class);
+Route::get('product-orders/{customer}', [ProductOrderController::class,'create'])->name('product-orders.create');
+Route::post('product-orders/{customer}', [ProductOrderController::class,'store'])->name('product-orders.store');
+Route::get('product-orders', [ProductOrderController::class,'index'])->name('product-orders.index');
+// Route::resource('product-orders', ProductOrderController::class);

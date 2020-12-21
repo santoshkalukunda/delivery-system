@@ -23,7 +23,7 @@ class CreateProductOrdersTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->string('address');
             $table->string('email')->nullable();
-            $table->string('order_date');
+            $table->string('date');
             $table->unsignedBigInteger('branch_id');
             $table->foreign('branch_id')->references('id')->on('branches');
             $table->string('code');
@@ -31,9 +31,9 @@ class CreateProductOrdersTable extends Migration
             $table->string('quantity');
             $table->string('price');
             $table->string('payment_status');
-            $table->Text('details');
+            $table->Text('details')->nullable();
             $table->text('comments')->nullable();
-            $table->uuid('user_id');
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('status');
             $table->timestamps();

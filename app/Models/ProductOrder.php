@@ -36,4 +36,16 @@ class ProductOrder extends Model
     {
         return $this->belongsTo(City::class);
     }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }
