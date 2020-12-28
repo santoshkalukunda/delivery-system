@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('title')
-Dashbord
+Customer
 @endsection
 @section('content')
 <div class="row">

@@ -10,8 +10,7 @@ Dashbord
                 <div class="ibox-title">Customers List</div>
             </div>
             <div class="ibox-body">
-             <form action="{{route('customers.find')}}" method="post">
-                 @csrf
+             <form action="{{route('customers.find')}}" method="get">
                 <div class="d-flex my-5">
                     <div class="col-md-2">
                         <label for="contact">Customer Contact No.</label>

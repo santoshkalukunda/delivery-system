@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 @section('title')
-Dashbord
+Product Order
 @endsection
 @section('content')
 <div class="row">
@@ -224,4 +224,8 @@ Dashbord
         </div>
     </div>
 </div>
+
+
+@include('product-order.product-list')
+
 @endsection

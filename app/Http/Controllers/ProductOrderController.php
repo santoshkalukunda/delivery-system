@@ -29,9 +29,11 @@ class ProductOrderController extends Controller
      */
     public function create(Customer $customer)
     {
+        // $customer->load('productOrder','city');
         $branches = Branch::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
-        return view('product-order.create', compact('customer', 'cities', 'branches'));
+        $productOrders=ProductOrder::with('city','branch')->where('customer_id',$customer->id)->get();
+        return view('product-order.create', compact('customer', 'cities', 'branches','productOrders'));
     }
 
     /**

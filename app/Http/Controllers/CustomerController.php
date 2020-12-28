@@ -56,8 +56,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        $branches=Branch::orderBy('name')->get();
-        $cities = City::orderBy('name')->get();
+        // $branches=Branch::orderBy('name')->get();
+        // $cities = City::orderBy('name')->get();
         // return view('customer.show', compact('customer','cities','branches'));
         // return view('product-order.create', compact('customer','cities','branches'));
         return redirect()->route('product-orders.create',$customer);

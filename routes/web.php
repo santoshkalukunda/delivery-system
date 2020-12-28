@@ -31,7 +31,7 @@ Route::view('dashbord', 'dashbord');
 Route::resource('cities', CityController::class);
 Route::resource('branches', BranchController::class);
 Route::get('customers/find', [CustomerController::class,'view'])->name('customers.view');
-Route::get('customers/find', [CustomerController::class,'find'])->name('customers.find');
+Route::get('customers/new', [CustomerController::class,'find'])->name('customers.find');
 Route::resource('customers', CustomerController::class);
 Route::get('product-orders/{customer}', [ProductOrderController::class,'create'])->name('product-orders.create');
 Route::post('product-orders/{customer}', [ProductOrderController::class,'store'])->name('product-orders.store');

@@ -9,7 +9,7 @@
             </li>
             <li class="heading">FEATURES</li>
             <li>
-                <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-shopping-cart"></i>
+                <a href="{{route('product-orders.index')}}"><i class="sidebar-item-icon fa fa-shopping-cart"></i>
                     <span class="nav-label">Product Order</span></a>
             </li>
             <li>
