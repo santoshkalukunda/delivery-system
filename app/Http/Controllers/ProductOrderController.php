@@ -27,7 +27,7 @@ class ProductOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Customer $customer)
+    public function create(Customer $customer=null, ProductOrder $productOrder=null)
     {
         // $customer->load('productOrder','city');
         $branches = Branch::orderBy('name')->get();
@@ -57,7 +57,7 @@ class ProductOrderController extends Controller
      */
     public function show(ProductOrder $productOrder)
     {
-        //
+        
     }
 
     /**
@@ -68,7 +68,9 @@ class ProductOrderController extends Controller
      */
     public function edit(ProductOrder $productOrder)
     {
-        //
+        $branches = Branch::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        return view('product-order.edit',compact('productOrder','cities','branches'));
     }
 
     /**
@@ -78,9 +80,10 @@ class ProductOrderController extends Controller
      * @param  \App\Models\ProductOrder  $productOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductOrder $productOrder)
+    public function update(ProductOrderRequest $request, ProductOrder $productOrder)
     {
-        //
+        $customer = $productOrder->update($request->validated());
+        return redirect()->back()->with('success', 'Customer updated.');
     }
 
     /**
@@ -91,6 +94,7 @@ class ProductOrderController extends Controller
      */
     public function destroy(ProductOrder $productOrder)
     {
-        //
+        $productOrder->delete();
+        return redirect()->back()->with('success','Order deleted');
     }
 }

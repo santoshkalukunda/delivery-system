@@ -38,16 +38,14 @@
                                 <td></td>
                                 <td>{{$productOrder->status}}</td>
                                 <td>
-                                    <a href="" class="text-muted"><i
-                                            class="fa fa-eye"></i></a>
+                                    <a href="{{route('product-orders.show',$productOrder)}}" class="text-muted"><i class="fa fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a href="" class="text-muted"><i
+                                    <a href="{{route('product-orders.edit',$productOrder)}}" class="text-muted"><i
                                             class="fa fa-edit"></i></a>
                                 </td>
                                 <td>
-                                    <form action=""
-                                        onsubmit="return confirm('Are you sure to delete?')" method="POST"
+                                    <form action="{{route('product-orders.destroy',$productOrder)}}" onsubmit="return confirm('Are you sure to delete?')" method="POST"
                                         class="d-inline">
                                         @csrf
                                         @method('delete')

@@ -173,8 +173,8 @@ Product Order
                                     class="form-control @error('status') is-invalid @enderror" id="status">
                                     <option value="confirm">Confirm</option>
                                     <option value="shipping">Shipping</option>
-                                    <option value="delivery">Delivered</option>
-                                    <option value="not-delivery">Not-Deliver</option>
+                                    <option value="delivered">Delivered</option>
+                                    <option value="not-deliver">Not-Deliver</option>
                                 </select>
                                 @error('status')
                                 <div class="invalid-feedback">
@@ -225,7 +225,7 @@ Product Order
     </div>
 </div>
 
-
+{{-- listing product orders history --}}
 @include('product-order.product-list')
 
 @endsection

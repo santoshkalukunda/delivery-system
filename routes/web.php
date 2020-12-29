@@ -36,4 +36,8 @@ Route::resource('customers', CustomerController::class);
 Route::get('product-orders/{customer}', [ProductOrderController::class,'create'])->name('product-orders.create');
 Route::post('product-orders/{customer}', [ProductOrderController::class,'store'])->name('product-orders.store');
 Route::get('product-orders', [ProductOrderController::class,'index'])->name('product-orders.index');
+Route::delete('product-orders/{productOrder}', [ProductOrderController::class,'destroy'])->name('product-orders.destroy');
+Route::get('product-orders/{productOrder}/show', [ProductOrderController::class,'show'])->name('product-orders.show');
+Route::get('product-orders/{productOrder}/edit', [ProductOrderController::class,'edit'])->name('product-orders.edit');
+Route::put('product-orders/{productOrder}', [ProductOrderController::class,'update'])->name('product-orders.update');
 // Route::resource('product-orders', ProductOrderController::class);
