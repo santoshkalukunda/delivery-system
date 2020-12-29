@@ -33,9 +33,9 @@ class CreateProductOrdersTable extends Migration
             $table->string('payment_status');
             $table->Text('details')->nullable();
             $table->text('comments')->nullable();
-            $table->uuid('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('status');
+            $table->string('status')->default('confirm');
             $table->timestamps();
         });
     }

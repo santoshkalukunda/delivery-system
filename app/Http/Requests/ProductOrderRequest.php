@@ -36,7 +36,6 @@ class ProductOrderRequest extends FormRequest
             'quantity' => 'required',
             'price' => 'required',
             'payment_status' => 'required',
-            'status' => 'required',
             'user_id' => 'nullable',
             'details' => 'nullable',
             'comments' => 'nullable',

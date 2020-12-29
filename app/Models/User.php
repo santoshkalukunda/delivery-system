@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,27 +12,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     use HasRoles;
-    use Uuid;          
-    
-    /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+   
 
     public function city()
     {
@@ -49,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'branch_id',
     ];
 
     /**
@@ -72,5 +52,9 @@ class User extends Authenticatable
 
     public function productOrder(){
         return $this->hasMany(ProductOrder::class);
+    }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

@@ -13,4 +13,7 @@ class Branch extends Model
     public function productOrder(){
         return $this->hasMany(ProductOrder::class);
     }
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

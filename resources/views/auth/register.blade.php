@@ -10,7 +10,41 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+                     
+                        <div class="form-group row">
+                            <label for="branch" class="col-md-4 col-form-label text-md-right">{{ __('Branch') }}</label>
 
+                            <div class="col-md-6">
+                                <select id="branch" type="text" class="form-control @error('branch_id') is-invalid @enderror" name="branch_id" value="{{ old('branch_id') }}" required>
+                                    <option value="">Select Branch</option>
+                                    @foreach ($branches as $branch)    
+                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('branch_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="role" type="text" class="form-control @error('role_id') is-invalid @enderror" name="role" value="{{ old('role') }}" required>
+                                    <option value="">Select role</option>
+                                    @foreach ($roles as $role)    
+                                    <option value="{{$role->name}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
