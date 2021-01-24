@@ -19,7 +19,7 @@ Customer
                         <div class="form-group col-md-4">
                             <label for="number" class="required">Contact number</label>
                             <input type="tel" id="number" name="contact"
-                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->contact)}}" placeholder="98XXXXXXXX" {{$customer->id ? 'disabled' : ''}} >
+                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->id ? $customer->contact : $contact)}}" placeholder="98XXXXXXXX" {{$customer->id ? 'disabled' : ''}} >
                             @error('contact')
                             <div class="invalid-feedback">
                                 {{ $message }}

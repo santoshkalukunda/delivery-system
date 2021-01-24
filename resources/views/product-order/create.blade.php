@@ -77,6 +77,18 @@ Product Order
                                 </div>
                                 @enderror
                             </div>
+                            <div class="form-group col-md-4">
+                                <label for="number">Alternative Contact number</label>
+                                <input type="tel" id="number" name="alt_contact"
+                                    class="form-control @error('alt-contact') is-invalid @enderror"
+                                    value="{{old('alt_contact')}}" placeholder="98XXXXXXXX">
+                                @error('alt-contact')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+
                         </div>
                     </fieldset>
                     <fieldset class="border p-2">

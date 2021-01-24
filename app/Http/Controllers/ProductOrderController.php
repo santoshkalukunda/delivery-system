@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\City;
 use App\Models\Customer;
 use App\Models\ProductOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductOrderController extends Controller
@@ -57,7 +58,8 @@ class ProductOrderController extends Controller
      */
     public function show(ProductOrder $productOrder)
     {
-        
+        $deliveryAgents=User::where('branch_id',$productOrder->branch_id)->role('delivery_agent')->get();
+        return view('product-order.show',compact('productOrder','deliveryAgents'));
     }
 
     /**
@@ -96,5 +98,16 @@ class ProductOrderController extends Controller
     {
         $productOrder->delete();
         return redirect()->back()->with('success','Order deleted');
+    }
+
+    public function assing(Request $request, ProductOrder $productOrder){
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+        $productOrder->update([
+            'user_id' => $request->user_id,
+            'status' => 'shipping',
+        ]);
+        return redirect()->route('product-orders.show',$productOrder)->with('success', 'Product assigned.');
     }
 }

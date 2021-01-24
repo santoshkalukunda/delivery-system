@@ -39,6 +39,7 @@ class ProductOrderRequest extends FormRequest
             'user_id' => 'nullable',
             'details' => 'nullable',
             'comments' => 'nullable',
+            'alt_contact' => 'nullable',
         ];
     }
 }

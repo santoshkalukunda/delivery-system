@@ -10,7 +10,7 @@ class ProductOrder extends Model
 {
     use HasFactory;
     use Uuid;          
-    
+
     /**
      * The "type" of the auto-incrementing ID.
      *
@@ -31,7 +31,8 @@ class ProductOrder extends Model
      * @var array
      */
     protected $guarded = [];
-
+  
+  
     public function city()
     {
         return $this->belongsTo(City::class);

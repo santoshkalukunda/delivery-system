@@ -10,19 +10,20 @@ Dashbord
                 <div class="ibox-title">Customers List</div>
             </div>
             <div class="ibox-body">
-             <form action="{{route('customers.find')}}" method="get">
-                <div class="d-flex my-5">
-                    <div class="col-md-2">
-                        <label for="contact">Customer Contact No.</label>
+                <form action="{{route('customers.find')}}" method="get">
+                    <div class="d-flex my-5">
+                        <div class="col-md-2">
+                            <label for="contact">Customer Contact No.</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="tel" class="form-control" name="contact" id="contact"
+                                placeholder="Costumer Contact" autofocus required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Proceed</button>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <input type="tel" class="form-control" name="contact" id="contact" placeholder="Costumer Contact" autofocus required>
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn btn-primary">Proceed</button>
-                    </div>
-                </div>
-             </form>
+                </form>
             </div>
         </div>
     </div>

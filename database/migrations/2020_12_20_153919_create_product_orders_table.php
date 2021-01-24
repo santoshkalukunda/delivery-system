@@ -19,6 +19,7 @@ class CreateProductOrdersTable extends Migration
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('name');
             $table->string('contact');
+            $table->string('alt_contact')->nullable();
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities');
             $table->string('address');

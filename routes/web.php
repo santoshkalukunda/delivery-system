@@ -30,8 +30,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::view('dashbord', 'dashbord');
     Route::resource('cities', CityController::class);
     Route::resource('branches', BranchController::class);
-    Route::get('customers/find', [CustomerController::class, 'view'])->name('customers.view');
-    Route::get('customers/new', [CustomerController::class, 'find'])->name('customers.find');
+    Route::post('customers/find', [CustomerController::class, 'find'])->name('customers.find');
     Route::resource('customers', CustomerController::class);
     Route::get('product-orders/{customer}', [ProductOrderController::class, 'create'])->name('product-orders.create');
     Route::post('product-orders/{customer}', [ProductOrderController::class, 'store'])->name('product-orders.store');
@@ -40,6 +39,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('product-orders/{productOrder}/show', [ProductOrderController::class, 'show'])->name('product-orders.show');
     Route::get('product-orders/{productOrder}/edit', [ProductOrderController::class, 'edit'])->name('product-orders.edit');
     Route::put('product-orders/{productOrder}', [ProductOrderController::class, 'update'])->name('product-orders.update');
+    Route::post('product-orders/{productOrder}/assing', [ProductOrderController::class, 'assing'])->name('product-orders.assign');
     // Route::resource('product-orders', ProductOrderController::class);
     Route::get('users',[UserController::class,'index'])->name('users.index');
     Route::delete('users/{user}',[UserController::class,'destroy'])->name('users.destroy');

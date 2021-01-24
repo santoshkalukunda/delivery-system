@@ -26,13 +26,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Customer $customer = null)
+    public function create(Customer $customer = null, $contact = null)
     {
         if (!$customer) {
             $customer = new Customer;
         }
         $cities = City::orderBy('name')->get();
-        return view('customer.create', compact('cities', 'customer'));
+        return view('customer.create', compact('cities', 'customer', 'contact'));
     }
 
     /**
@@ -105,16 +105,12 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect()->back()->with('success', 'Customer Deleted');
     }
-    public function view()
-    {
-        return view('customer.find');
-    }
     public function find(Request $request)
     {
         $customer=Customer::where('contact',$request->contact)->first();
         if($customer){
             return redirect()->route('customers.show', $customer);
         }
-        return redirect()->route('customers.create', $customer);
+        return $this->create($customer,$request->contact);
     }
 }

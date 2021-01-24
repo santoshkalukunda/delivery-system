@@ -4,6 +4,14 @@ Dashbord
 @endsection
 @section('content')
 <div class="row">
+    <div class="col-md-2">
+        <a href="{{route('customers.create')}}" class="btn btn-primary mb-2 form-control "> <i class="fa fa-plus"></i> New Customer
+        </a>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+
     <div class="col-lg-12">
         <div class="ibox">
             <div class="ibox-head">
