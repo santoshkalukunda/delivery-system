@@ -25,6 +25,10 @@
                     <span class="nav-label">Cities</span></a>
             </li>
             <li>
+                <a href="{{route('users.index')}}"><i class="sidebar-item-icon fa fa-users"></i>
+                    <span class="nav-label">Users</span></a>
+            </li>
+            <li>
                 <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
                     <span class="nav-label">Basic UI</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">

@@ -4,6 +4,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductOrderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,13 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('product-orders/{productOrder}/edit', [ProductOrderController::class, 'edit'])->name('product-orders.edit');
     Route::put('product-orders/{productOrder}', [ProductOrderController::class, 'update'])->name('product-orders.update');
     // Route::resource('product-orders', ProductOrderController::class);
+    Route::get('users',[UserController::class,'index'])->name('users.index');
+    Route::delete('users/{user}',[UserController::class,'destroy'])->name('users.destroy');
+    Route::get('users/{user}',[UserController::class,'edit'])->name('users.edit');
+    Route::post('users/{user}',[UserController::class,'update'])->name('users.update');
+    Route::get('users/{user}/change-password',[UserController::class,'changePasswordShow'])->name('users.changePasswordShow');
+    Route::post('users/{user}/change-password',[UserController::class,'changePassword'])->name('users.changePassword');
+    
 });
 Route::group(['middleware' => ['role:user|admin']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

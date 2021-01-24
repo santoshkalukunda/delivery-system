@@ -68,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -77,6 +77,7 @@ class RegisterController extends Controller
         ]);
         $user->syncRoles($data['role']);
         return $user;
+        // return redirect()->route('users.index')->with('success','User Registration Successfully');
     }
     public function showRegistrationForm()
     {
