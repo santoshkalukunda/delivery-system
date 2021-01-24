@@ -19,7 +19,7 @@ Customer
                         <div class="form-group col-md-4">
                             <label for="number" class="required">Contact number</label>
                             <input type="tel" id="number" name="contact"
-                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->contact)}}" placeholder="98XXXXXXXX">
+                                class="form-control @error('contact') is-invalid @enderror" value="{{old('contact',$customer->contact)}}" placeholder="98XXXXXXXX" {{$customer->id ? 'disabled' : ''}} >
                             @error('contact')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -95,7 +95,7 @@ Customer
                             <button type="reset" class="btn btn-danger form-control btn-rounded">Cancel</button>
                         </div>
                         <div class="form-group col-md-2" >
-                            <button type="submit" class="btn btn-success form-control btn-rounded">Next</button>
+                            <button type="submit" class="btn btn-success form-control btn-rounded">{{$customer->id ? 'Update' : 'Next'}}</button>
                         </div>
                     </div>
                 </form>           

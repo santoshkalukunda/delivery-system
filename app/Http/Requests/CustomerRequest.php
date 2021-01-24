@@ -25,10 +25,10 @@ class CustomerRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'contact' => 'required|unique:customers,contact',
+            'contact' => 'required|unique:customers,contact,',
             'address' => 'required',
             'city_id' => 'required',
-            'email' => 'nullable|email|unique:customers,email',
+            'email' => 'nullable|email',
             'details' => 'nullable'
 
         ];

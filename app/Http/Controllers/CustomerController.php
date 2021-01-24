@@ -81,10 +81,17 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(CustomerRequest $request, Customer $customer)
+    public function update(Request $request, Customer $customer)
     {
-        $customer->update($request->validated());
-        return redirect()->route('customers.show', $customer)->with('success', 'Customer Updated.');
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city_id' => 'required',
+            'email' => 'nullable|email',
+            'details' => 'nullable'
+        ]);
+        $customer->update($request->all());
+        return redirect()->route('customers.index')->with('success', 'Customer Updated.');
     }
 
     /**
