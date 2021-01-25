@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\ProductOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -33,9 +35,17 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, ProductOrder $productOrder)
     {
-        //
+        $request->validate([
+            'message' => 'required',
+        ]);
+    $comment=Comment::create([
+            'product_order_id' => $productOrder->id,
+            'user_id' => Auth::user()->id,
+            'message' => $request->message,
+        ]);
+        return redirect()->back();
     }
 
     /**

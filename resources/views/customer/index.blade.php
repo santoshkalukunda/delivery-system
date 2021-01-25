@@ -1,16 +1,15 @@
 @extends('layouts.backend')
 @section('title')
-Dashbord
+Customer List
 @endsection
 @section('content')
 <div class="row">
     <div class="col-md-2">
-        <a href="{{route('customers.create')}}" class="btn btn-primary mb-2 form-control "> <i class="fa fa-plus"></i> New Customer
-        </a>
+        <button type="button" class="btn btn-primary mb-2 form-control" data-toggle="modal"
+            data-target="#findCustomerModal"> <i class="fa fa-plus"></i> New Costumer
+        </button>
     </div>
-    <div class="col-md-2">
-
-    </div>
+   @include('product-order.find-customer-modal')
 
     <div class="col-lg-12">
         <div class="ibox">

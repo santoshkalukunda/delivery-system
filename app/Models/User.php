@@ -53,8 +53,13 @@ class User extends Authenticatable
     public function productOrder(){
         return $this->hasMany(ProductOrder::class);
     }
+
     public function branch()
     {
         return $this->belongsTo(Branch::class);
+    }
+    
+    public function comment(){
+        return $this->hasMany(Comment::class);
     }
 }

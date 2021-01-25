@@ -17,7 +17,7 @@
                                 <th>Payment</th>
                                 <th>Contact No.</th>
                                 <th>City</th>
-                                <th>Deliver_by</th>
+                                <th>User by</th>
                                 <th>stutus</th>
                                 <th colspan="3">Action</th>
                             </tr>
@@ -35,7 +35,10 @@
                                 <td>{{$productOrder->payment_status}}</td>
                                 <td>{{$productOrder->contact}}</td>
                                 <td>{{$productOrder->city->name}} <span  class="text-secondary">{{$productOrder->city->provinces}}</span></td>
-                                <td></td>
+                                <td>@if ($productOrder->user_id)
+                                    {{$productOrder->user->name}}
+                                @endif
+                                </td>
                                 <td>{{$productOrder->status}}</td>
                                 <td>
                                     <a href="{{route('product-orders.show',$productOrder)}}" class="text-muted"><i class="fa fa-eye"></i></a>

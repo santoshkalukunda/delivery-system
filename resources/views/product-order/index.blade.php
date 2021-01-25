@@ -12,6 +12,6 @@ Product Order List
     <div class="col-md-2">
     </div>
 </div>
-@include('product-order.find-customer-modal')
+@include('modal.find-customer-modal')
 @include('product-order.product-list')
 @endsection

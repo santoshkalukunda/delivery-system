@@ -49,4 +49,8 @@ class ProductOrder extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
 }
