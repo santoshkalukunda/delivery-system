@@ -1,8 +1,9 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox">
-            <div class="ibox-head">
+            <div class="ibox-head d-flex">
                 <div class="ibox-title">Product Order List</div>
+                <div class="text-right">Total Record: {{$productOrders->total()}}</div>
             </div>
             <div class="ibox-body">
                 <div class="table-responsive">
@@ -11,12 +12,12 @@
                             <tr>
                                 <th>Order_Date</th>
                                 <th>Branch</th>
-                                <th>Product code</th>
+                                <th>Product</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
-                                <th>Payment</th>
-                                <th>Contact No.</th>
-                                <th>City</th>
+                                <th>Sender</th>
+                                <th>Reciever</th>
+                                <th>Address</th>
                                 <th>User by</th>
                                 <th>stutus</th>
                                 <th colspan="3">Action</th>
@@ -29,12 +30,12 @@
                                     {{$productOrder->date}}
                                 </td>
                                 <td>{{$productOrder->branch->name}}</td>
-                                <td>{{$productOrder->code}}</td>
+                                <td>{{$productOrder->product_name}}, {{$productOrder->code}}</td>
                                 <td>{{$productOrder->quantity}}</td>
-                                <td>{{$productOrder->price}}</td>
-                                <td>{{$productOrder->payment_status}}</td>
-                                <td>{{$productOrder->contact}}</td>
-                                <td>{{$productOrder->city->name}} <span  class="text-secondary">{{$productOrder->city->provinces}}</span></td>
+                                <td>{{$productOrder->price}} {{$productOrder->payment_status}}</td>
+                                <td>{{$productOrder->customer->name}}, {{$productOrder->customer->contact}}</td>
+                                <td>{{$productOrder->name}}, {{$productOrder->contact}}</td>
+                                <td>{{$productOrder->address}}, {{$productOrder->city->name}} <span  class="text-secondary">{{$productOrder->city->provinces}}</span></td>
                                 <td>@if ($productOrder->user_id)
                                     {{$productOrder->user->name}}
                                 @endif
@@ -67,5 +68,6 @@
                 </div>
             </div>
         </div>
+        {{$productOrders->links()}}
     </div>
 </div>

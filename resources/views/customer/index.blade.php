@@ -56,8 +56,10 @@ Customer List
     </div>
     <div class="col-lg-12">
         <div class="ibox">
-            <div class="ibox-head">
+            <div class="ibox-head d-flex">
                 <div class="ibox-title">Customers List</div>
+                <div class="text-right">Total Record: {{$customers->total()}}</div>
+
             </div>
             <div class="ibox-body">
                 <div class="table-responsive">
@@ -112,6 +114,7 @@ Customer List
                 </div>
             </div>
         </div>
+        {{$customers->links()}}
     </div>
 </div>
 @endsection

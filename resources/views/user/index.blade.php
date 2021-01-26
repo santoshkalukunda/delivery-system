@@ -31,7 +31,7 @@ User List
                                         {{$branch->name}}</option>
                                     @endforeach
                                 </select>
-                           
+
                             </div>
                             <div class="col-md-2 form-group">
                                 <select name="role" id="" class="form-control">
@@ -57,8 +57,9 @@ User List
             </div>
         </div>
         <div class="ibox">
-            <div class="ibox-head">
-                <div class="ibox-title">User List</div>
+            <div class="ibox-head d-flex">
+                <div class="ibox-title">User List </div>
+                <div class="text-right">Total Record: {{$users->total()}}</div>
             </div>
             <div class="ibox-body">
                 <div class="table-responsive">
@@ -114,6 +115,7 @@ User List
                 </div>
             </div>
         </div>
+        {{$users->links()}}
     </div>
 </div>
 @endsection

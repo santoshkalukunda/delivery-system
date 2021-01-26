@@ -92,6 +92,7 @@ Dashbord
                         <span>Total Record: {{$cities->total()}}</span>
                     </div>
                 </div>
+                <hr>
                 <table class="table table-hover">
                     <thead class="bg-dark-light">
                         <tr>

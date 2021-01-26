@@ -30,8 +30,12 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::view('dashbord', 'dashbord');
+
+    //cities Route
     Route::get('cities/search',[CityController::class,'search'])->name('cities.search');
     Route::resource('cities', CityController::class);
+
+    //branches route
     Route::get('branches/search', [BranchController::class,'search'])->name('branches.search');
     Route::resource('branches', BranchController::class);
 
@@ -41,6 +45,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::resource('customers', CustomerController::class);
 
     //product_orders route
+    Route::get('product-orders/search', [ProductOrderController::class, 'search'])->name('product-orders.search');
     Route::get('product-orders/{customer}', [ProductOrderController::class, 'create'])->name('product-orders.create');
     Route::post('product-orders/{customer}', [ProductOrderController::class, 'store'])->name('product-orders.store');
     Route::get('product-orders', [ProductOrderController::class, 'index'])->name('product-orders.index');

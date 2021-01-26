@@ -9,9 +9,9 @@ Product Order List
             data-target="#findCustomerModal"> <i class="fa fa-plus"></i> New Order
         </button>
     </div>
-    <div class="col-md-2">
-    </div>
+  @include('product-order.filter')
 </div>
+
 @include('modal.find-customer-modal')
 @include('product-order.product-list')
 @endsection
