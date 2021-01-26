@@ -18,7 +18,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::with('city')->latest()->paginate(20);
-        return view('customer.index', compact('customers'));
+        $cities=City::get();
+        return view('customer.index', compact('customers','cities'));
     }
 
     /**
@@ -112,5 +113,33 @@ class CustomerController extends Controller
             return redirect()->route('customers.show', $customer);
         }
         return $this->create($customer,$request->contact);
+    }
+
+    public function search(Request $request)
+    {
+        $customers = new Customer;
+        if ($request->has('city_id')) {
+            if ($request->city_id != null)
+                $customers = $customers->where('city_id', ["$request->city_id"]);
+        }
+        if ($request->has('name')) {
+            if ($request->name != null)
+                $customers = $customers->where('name', 'LIKE', ["$request->name%"]);
+        }
+        if ($request->has('email')) {
+            if ($request->email != null)
+                $customers = $customers->where('email', 'LIKE', ["$request->email%"]);
+        }
+        if ($request->has('contact')) {
+            if ($request->contact != null)
+                $customers = $customers->where('contact',["$request->contact"]);
+        }
+        if ($request->has('address')) {
+            if ($request->address != null)
+            $customers = $customers->where('address', 'LIKE', ["$request->address%"]);
+        }
+        $customers = $customers->paginate(20);
+        $cities=City::get();
+        return view('customer.index', compact('customers','cities'));
     }
 }
