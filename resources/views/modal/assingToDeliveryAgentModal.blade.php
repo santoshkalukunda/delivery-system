@@ -13,12 +13,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="">Delivery Agent Select</label>
-                        <select name="user_id" id="" class="form-control">
-                            <option value="">Select Delevery Agent</option>
-                            @foreach ($deliveryAgents as $deliveryAgent)
-                            <option value="{{$deliveryAgent->id}}">{{$deliveryAgent->name}}</option>
+                        <select class="selectpicker form-control " name="user_id" data-live-search="true"
+                            data-size="5">
+                            <option value="" selected>Select User</option>
+                            @foreach ($users as $user)
+                            <option value="{{$user->id}}" data-subtext="{{$user->branch->name}}"> {{$user->name}}
+                            </option>
                             @endforeach
                         </select>
+
                     </div>
                     <div class="form-group">
                         <label for="">Comments</label>
