@@ -58,6 +58,17 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => "<b class='text-success'>Product Order Created</b>. <br>",
         ]);
+        $customer=Customer::where('contact',$request->contact)->first();
+        if(!$customer){
+            $customer = Customer::create([
+                'name' => $request->name,
+                'contact' => $request->contact,
+                'city_id' => $request->city_id,
+                'address' => $request->address,
+                'email' => $request->email,
+                'details' => "Alter navive Contact No. ".$request->alt_contact,
+            ]);
+        }
         return redirect()->route('product-orders.show', $product_order)->with('success', 'New Order created');
     }
 
