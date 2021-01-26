@@ -34,8 +34,8 @@ Dashbord
                     <div class="form-group">
                         <label for="name">Name City</label>
                         <input type="text" id="name" name="name"
-                            class="form-control @error('name') is-invalid @enderror"
-                            value="{{old('name',$city->name)}}" placeholder="City Name">
+                            class="form-control @error('name') is-invalid @enderror" value="{{old('name',$city->name)}}"
+                            placeholder="City Name">
                         @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -51,6 +51,37 @@ Dashbord
         </div>
     </div>
     <div class="col-lg-8">
+        <div class="mb-2">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#filter" role="button"
+                    aria-expanded="false" aria-controls="filter">
+                    <i class="fa fa-filter"></i> Filter
+                </a>
+            </p>
+            <div class="collapse" id="filter">
+                <div class="card card-body">
+                    <form action="{{route('cities.search')}}" method="get">
+                        <div class="row">
+                            <div class="col-md-5 form-group">
+                                <select name="provinces" id="" class="form-control">
+                                    <option value="">Select Province</option>
+                                    @foreach (config('provinces.name') as $key => $value)
+                                    <option value="{{ $key }}" {{$city->provinces == $key ? "selected" : ""}}>
+                                        {{ $value ?? $key }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-5 form-group">
+                                <input type="text" class=" form-control" name="name" placeholder="City">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="form-control btn- btn-primary" value="Search">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="ibox">
             <div class="ibox-body table-responsive">
                 <div class="row">

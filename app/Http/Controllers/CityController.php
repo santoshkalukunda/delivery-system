@@ -90,4 +90,22 @@ class CityController extends Controller
         $city->delete();
         return redirect()->back()->with('success','City Deleted');
     }
+
+    public function search(Request $request){
+        $cities = new City;
+        if ($request->has('provinces')) {
+            if ($request->provinces != null)
+                $cities = $cities->where('provinces', ["$request->provinces"]);
+        }
+        if ($request->has('name')) {
+            if ($request->name != null)
+                $cities = $cities->where('name', 'LIKE', ["$request->name%"]);
+        }
+        $cities=$cities->paginate(20);
+        $city=null;
+        if (!$city) {
+            $city = new City;
+        }
+        return view('city.index',compact('cities','city'));
+    }
 }

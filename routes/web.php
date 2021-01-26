@@ -30,6 +30,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::view('dashbord', 'dashbord');
+    Route::get('cities/search',[CityController::class,'search'])->name('cities.search');
     Route::resource('cities', CityController::class);
     Route::resource('branches', BranchController::class);
     Route::post('customers/find', [CustomerController::class, 'find'])->name('customers.find');
