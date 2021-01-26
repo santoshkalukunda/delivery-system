@@ -9,7 +9,7 @@ Customer List
             data-target="#findCustomerModal"> <i class="fa fa-plus"></i> New Costumer
         </button>
     </div>
-   @include('product-order.find-customer-modal')
+   @include('modal.find-customer-modal')
 
     <div class="col-lg-12">
         <div class="ibox">

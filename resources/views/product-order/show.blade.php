@@ -13,12 +13,14 @@ Product Order
                 @if ($productOrder->status == "confirm" OR $productOrder->status =="shipping")
 
                 <div class="row">
+                    {{-- @if (!Auth::user()->hasRole(['delivery_agent'])) --}}
                     <div class="col-md-2">
                         <button type="button" class="btn btn-primary mb-2 form-control" data-toggle="modal"
                             data-target="#assingToDeliveryAgent">
                             <i class="fa fa-share"></i> Assign to Agent
                         </button>
                     </div>
+                    {{-- @endif --}}
                     <div class="col-md-2">
                         <button type="button" class="btn btn-warning mb-2 form-control" data-toggle="modal"
                             data-target="#comment">

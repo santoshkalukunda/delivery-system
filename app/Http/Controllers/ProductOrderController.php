@@ -66,7 +66,7 @@ class ProductOrderController extends Controller
     public function show(ProductOrder $productOrder)
     {
         $deliveryAgents=User::where('branch_id',$productOrder->branch_id)->role('delivery_agent')->get();
-        $comments=$productOrder->comment()->latest()->get();
+        $comments=$productOrder->comment()->with('user')->latest()->get();
         return view('product-order.show',compact('productOrder','deliveryAgents','comments'));
     }
 

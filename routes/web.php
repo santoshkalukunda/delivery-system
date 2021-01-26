@@ -4,6 +4,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryAgentController;
 use App\Http\Controllers\ProductOrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -44,7 +45,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::put('product-orders/{productOrder}', [ProductOrderController::class, 'update'])->name('product-orders.update');
     Route::post('product-orders/{productOrder}/assing', [ProductOrderController::class, 'assing'])->name('product-orders.assign');
     Route::post('product-orders/{productOrder}/delivered', [ProductOrderController::class, 'delivered'])->name('product-orders.delivered');
-    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'notDeliver'])->name('product-orders.not-deliver');
+    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'noteliver'])->name('product-orders.not-deliver');
     // Route::resource('product-orders', ProductOrderController::class);
     
     //user route
@@ -65,5 +66,10 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 });
 
 Route::group(['middleware' => ['role:delivery_agent|user|admin']], function () {
-    Route::view('delivery-agent','delivery-agent.home')->name('delivery-agent');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('delivery-agent',[DeliveryAgentController::class,'index'])->name('delivery-agent.index');
+    Route::get('product-orders/{productOrder}/show', [ProductOrderController::class, 'show'])->name('product-orders.show');
+    Route::post('product-orders/{productOrder}/delivered', [ProductOrderController::class, 'delivered'])->name('product-orders.delivered');
+    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'noteliver'])->name('product-orders.not-deliver');
+    Route::post('product-orders/{productOrder}/comments', [CommentController::class, 'store'])->name('comments.store');
 });

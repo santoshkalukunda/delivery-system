@@ -40,9 +40,9 @@ class LoginController extends Controller
     }
     public function redirectTo()
     {
-        if(Auth::user()->hasRole('delivery_agent')){
-            return route('delivery-agent');
-        }
+        // if(Auth::user()->hasRole('delivery_agent')){
+        //     return route('delivery-agent');
+        // }
         return route('home');
     }
 }
