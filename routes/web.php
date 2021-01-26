@@ -32,6 +32,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::view('dashbord', 'dashbord');
     Route::get('cities/search',[CityController::class,'search'])->name('cities.search');
     Route::resource('cities', CityController::class);
+    Route::get('branches/search', [BranchController::class,'search'])->name('branches.search');
     Route::resource('branches', BranchController::class);
     Route::post('customers/find', [CustomerController::class, 'find'])->name('customers.find');
     Route::resource('customers', CustomerController::class);

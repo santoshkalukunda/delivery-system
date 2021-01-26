@@ -35,6 +35,28 @@ Dashbord
         </div>
     </div>
     <div class="col-lg-8">
+        <div class="mb-2">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#filter" role="button"
+                    aria-expanded="false" aria-controls="filter">
+                    <i class="fa fa-filter"></i> Filter
+                </a>
+            </p>
+            <div class="collapse" id="filter">
+                <div class="card card-body">
+                    <form action="{{route('branches.search')}}" method="get">
+                        <div class="row">
+                            <div class="col-md-10 form-group">
+                                <input type="text" class=" form-control" name="name" placeholder="Branch">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="form-control btn- btn-primary" value="Search">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="ibox">
             <div class="ibox-body table-responsive">
                 <div class="row">

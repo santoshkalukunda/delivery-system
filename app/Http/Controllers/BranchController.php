@@ -90,4 +90,18 @@ class BranchController extends Controller
         $branch->delete();
         return redirect()->back()->with('success','Branch Deleted');
     }
+
+    public function search(Request $request){
+        $branches = new Branch;
+        if ($request->has('name')) {
+            if ($request->name != null)
+                $branches = $branches->where('name', 'LIKE', ["$request->name%"]);
+        }
+        $branches=$branches->paginate(20);
+        $branch=null;
+        if (!$branch) {
+            $branch = new Branch;
+        }
+        return view('branch.index',compact('branches','branch'));
+    }
 }
