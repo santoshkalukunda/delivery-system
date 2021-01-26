@@ -51,6 +51,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     // Route::resource('product-orders', ProductOrderController::class);
     
     //user route
+    Route::get('users/search',[UserController::class,'search'])->name('users.search');
     Route::get('users',[UserController::class,'index'])->name('users.index');
     Route::delete('users/{user}',[UserController::class,'destroy'])->name('users.destroy');
     Route::get('users/{user}',[UserController::class,'edit'])->name('users.edit');

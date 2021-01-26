@@ -5,8 +5,56 @@ User List
 @section('content')
 <div class="row">
     <div class="col-lg-12">
+        <div class="mb-1 d-flex">
+            <div class="mr-2">
+                <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Register</a>
+            </div>
+            <div>
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
+                        aria-controls="filter">
+                        <i class="fa fa-filter"></i> Filter
+                    </a>
+                </p>
+            </div>
+        </div>
         <div class="mb-2">
-            <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Register</a>
+            <div class="collapse" id="filter">
+                <div class="card card-body">
+                    <form action="{{route('users.search')}}" method="get">
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <select name="branch_id" id="" class="form-control">
+                                    <option value="">Select Branch</option>
+                                    @foreach ($branches as $branch)
+                                    <option value="{{ $branch->id }}" class=" text-capitalize">
+                                        {{$branch->name}}</option>
+                                    @endforeach
+                                </select>
+                           
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <select name="role" id="" class="form-control">
+                                    <option value="">Select Role</option>
+                                    @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" class=" text-capitalize">
+                                        {{$role->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <input type="text" class=" form-control" name="name" placeholder="Name">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <input type="text" class=" form-control" name="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="submit" class="form-control btn- btn-primary" value="Search">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="ibox">
             <div class="ibox-head">

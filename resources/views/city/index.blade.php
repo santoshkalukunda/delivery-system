@@ -66,7 +66,7 @@ Dashbord
                                 <select name="provinces" id="" class="form-control">
                                     <option value="">Select Province</option>
                                     @foreach (config('provinces.name') as $key => $value)
-                                    <option value="{{ $key }}" {{$city->provinces == $key ? "selected" : ""}}>
+                                    <option value="{{ $key }}">
                                         {{ $value ?? $key }}</option>
                                     @endforeach
                                 </select>
