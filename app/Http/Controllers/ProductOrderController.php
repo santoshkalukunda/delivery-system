@@ -24,8 +24,13 @@ class ProductOrderController extends Controller
         $cities = City::get(['id', 'name', 'provinces']);
         $branches = Branch::get(['id', 'name']);
         $customers = Customer::get(['id', 'name', 'contact']);
-        $users = User::with('branch')->get(['id', 'name', 'branch_id']);
-        $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->latest()->paginate(20);
+        if (Auth::user()->hasRole(['admin'])) {
+            $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->latest()->paginate(20);
+            $users = User::with('branch')->get(['id', 'name', 'branch_id']);
+        } else {
+            $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->where('branch_id', Auth::user()->branch_id)->latest()->paginate(20);
+            $users = User::with('branch')->where('branch_id', Auth::user()->branch_id)->get(['id', 'name', 'branch_id']);
+        }
         return view('product-order.index', compact('productOrders', 'cities', 'branches', 'customers', 'users'));
     }
 
@@ -58,15 +63,15 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => "<b class='text-success'>Product Order Created</b>. <br>",
         ]);
-        $customer=Customer::where('contact',$request->contact)->first();
-        if(!$customer){
+        $customer = Customer::where('contact', $request->contact)->first();
+        if (!$customer) {
             $customer = Customer::create([
                 'name' => $request->name,
                 'contact' => $request->contact,
                 'city_id' => $request->city_id,
                 'address' => $request->address,
                 'email' => $request->email,
-                'details' => "Alter navive Contact No. ".$request->alt_contact,
+                'details' => "Alter navive Contact No. " . $request->alt_contact,
             ]);
         }
         return redirect()->route('product-orders.show', $product_order)->with('success', 'New Order created');
@@ -141,6 +146,7 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => $data,
         ]);
+
         return redirect()->route('product-orders.show', $productOrder)->with('success', 'Product assigned.');
     }
 
@@ -234,27 +240,34 @@ class ProductOrderController extends Controller
                 $productOrders = $productOrders->where('payment_status', ["$request->payment_status"]);
         }
         if ($request->has('min_quantity')) {
-            if ($request->min_quantity != null && $request->max_quantity != null ) {
+            if ($request->min_quantity != null && $request->max_quantity != null) {
                 // $productOrders = $productOrders->where('quantity','>=', ["$request->min_quantity"])->Where('quantity','<=', ["$request->max_quantity"]);
-                $productOrders = $productOrders->whereBetween('quantity', [$request->min_quantity,$request->max_quantity]);
+                $productOrders = $productOrders->whereBetween('quantity', [$request->min_quantity, $request->max_quantity]);
             }
         }
         if ($request->has('min_price')) {
             if ($request->min_price != null) {
                 // $productOrders = $productOrders->where('price','>=', ["$request->min_price"])->where('price','<=', ["$request->max_price"]);
-                 $productOrders = $productOrders->whereBetween('price', [$request->min_price,$request->max_price]);
+                $productOrders = $productOrders->whereBetween('price', [$request->min_price, $request->max_price]);
             }
         }
         if ($request->has('from')) {
             if ($request->from != null && $request->to != null) {
-                $productOrders = $productOrders->whereBetween('date', [$request->from,$request->to]);
+                $productOrders = $productOrders->whereBetween('date', [$request->from, $request->to]);
             }
         }
         $productOrders = $productOrders->paginate();
+        $users = User::with('branch')->get(['id', 'name', 'branch_id']);
+        // if (Auth::user()->hasRole(['admin'])) {
+        //     $productOrders = $productOrders->paginate();
+        //     $users = User::with('branch')->get(['id', 'name', 'branch_id']);
+        // } else {
+        //     $productOrders = $productOrders->where('branch_id', Auth::user()->branch_id)->paginate();
+        //     $users = User::with('branch')->where('branch_id', Auth::user()->branch_id)->get(['id', 'name', 'branch_id']);
+        // }
         $cities = City::get(['id', 'name', 'provinces']);
         $branches = Branch::get(['id', 'name']);
         $customers = Customer::get(['id', 'name', 'contact']);
-        $users = User::with('branch')->get(['id', 'name', 'branch_id']);
         return view('product-order.index', compact('productOrders', 'cities', 'branches', 'customers', 'users'));
     }
 }

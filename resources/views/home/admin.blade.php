@@ -32,6 +32,7 @@
         </div>
     </div>
 </div>
+@include('product-order.product-list')
 {{-- <div class="row">
     <div class="col-lg-4">
         <div class="ibox">
@@ -100,7 +101,7 @@
         </div>
     </div>
 </div> --}}
-<div class="row">
+{{-- <div class="row">
     <div class="col-lg-12">
         <div class="ibox">
             <div class="ibox-head">
@@ -190,4 +191,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

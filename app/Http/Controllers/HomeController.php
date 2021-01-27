@@ -30,14 +30,15 @@ class HomeController extends Controller
             $shipping = ProductOrder::where('status', 'shipping')->count();
             $delivered = ProductOrder::where('status', 'delivered')->count();
             $notDeliver = ProductOrder::where('status', 'not-delivered')->count();
-            return view('home',compact('confirm','shipping','delivered','notDeliver'));
-
+            $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->latest()->paginate(20);
+            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders'));
         } elseif (Auth::user()->hasRole(['user'])) {
-            $confirm = ProductOrder::where('status', 'confirm')->where('branch_id',Auth::user()->branch->id)->count();
-            $shipping = ProductOrder::where('status', 'shipping')->where('branch_id',Auth::user()->branch->id)->count();
-            $delivered = ProductOrder::where('status', 'delivered')->where('branch_id',Auth::user()->branch->id)->count();
-            $notDeliver = ProductOrder::where('status', 'not-delivered')->where('branch_id',Auth::user()->branch->id)->count();
-            return view('home',compact('confirm','shipping','delivered','notDeliver'));
+            $confirm = ProductOrder::where('status', 'confirm')->where('branch_id', Auth::user()->branch->id)->count();
+            $shipping = ProductOrder::where('status', 'shipping')->where('branch_id', Auth::user()->branch->id)->count();
+            $delivered = ProductOrder::where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->count();
+            $notDeliver = ProductOrder::where('status', 'not-delivered')->where('branch_id', Auth::user()->branch->id)->count();
+            $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->where('branch_id',Auth::user()->branch_id)->latest()->paginate(20);
+            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver','productOrders'));
         } else {
             return redirect()->route('delivery-agent.index');
             // $productOrders = ProductOrder::with('city')->where('status', 'shipping')->Where('user_id', Auth::user()->id)->latest()->paginate(20);
