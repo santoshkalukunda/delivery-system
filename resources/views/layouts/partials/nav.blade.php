@@ -1,11 +1,11 @@
 <!-- START HEADER-->
 <header class="header">
     <div class="page-brand">
-        <a class="link" href="index.html">
-            <span class="brand">Delivery
-                <span class="brand-tip">_System</span>
+        <a class="link" href="/">
+            <span class="brand">ClosetNepal
+                <span class="brand-tip"> Delivery</span>
             </span>
-            <span class="brand-mini">DS</span>
+            <span class="brand-mini">CND</span>
         </a>
     </div>
     <div class="flexbox flex-1">
@@ -22,9 +22,7 @@
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <span></span>{{ucwords(Auth::user()->name)}}<i class="fa fa-angle-down m-l-5"></i></a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i>Profile</a>
-                    <a class="dropdown-item" href="profile.html"><i class="fa fa-cog"></i>Settings</a>
-
+                    <a class="dropdown-item" href="{{route('users.changePasswordShow',Auth::user()->id)}}"><i class="fa fa-key"></i>Password Change</a>
                     <li class="dropdown-divider"></li>
 
                     {{-- <a class="dropdown-item" href="{{ route('logout') }}">

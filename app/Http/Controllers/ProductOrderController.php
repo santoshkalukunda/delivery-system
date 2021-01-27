@@ -24,12 +24,12 @@ class ProductOrderController extends Controller
         $cities = City::get(['id', 'name', 'provinces']);
         $branches = Branch::get(['id', 'name']);
         $customers = Customer::get(['id', 'name', 'contact']);
+        $users = User::with('branch')->get(['id', 'name', 'branch_id']);
         if (Auth::user()->hasRole(['admin'])) {
             $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->latest()->paginate(20);
-            $users = User::with('branch')->get(['id', 'name', 'branch_id']);
         } else {
             $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->where('branch_id', Auth::user()->branch_id)->latest()->paginate(20);
-            $users = User::with('branch')->where('branch_id', Auth::user()->branch_id)->get(['id', 'name', 'branch_id']);
+            // $users = User::with('branch')->where('branch_id', Auth::user()->branch_id)->get(['id', 'name', 'branch_id']);
         }
         return view('product-order.index', compact('productOrders', 'cities', 'branches', 'customers', 'users'));
     }

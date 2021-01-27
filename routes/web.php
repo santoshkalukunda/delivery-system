@@ -79,13 +79,13 @@ Route::group(['middleware' => ['role:user|admin']], function () {
     Route::get('cities/{city}/edit', [CityController::class, 'index'])->name('cities.edit');
     Route::put('cities/{city}', [CityController::class, 'update'])->name('cities.update');
     //customer route
-    Route::get('customers', [CustomerController::class,'index'])->name('customers.index');
+    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::post('customers/find', [CustomerController::class, 'find'])->name('customers.find');
     Route::get('customers/search', [CustomerController::class, 'search'])->name('customers.search');
-    Route::post('customers', [CustomerController::class,'store'])->name('customers.store');
-    Route::get('customers/{customer}/edit', [CustomerController::class,'edit'])->name('customers.edit');
-    Route::put('customers/{customer}', [CustomerController::class,'update'])->name('customers.update');
-    Route::get('customers/{customer}', [CustomerController::class,'show'])->name('customers.show');
+    Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('customers/{customer}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
+    Route::put('customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::get('customers/{customer}', [CustomerController::class, 'show'])->name('customers.show');
 
     //product_orders route
     Route::get('product-orders', [ProductOrderController::class, 'index'])->name('product-orders.index');
@@ -98,8 +98,11 @@ Route::group(['middleware' => ['role:user|admin']], function () {
     // Route::put('product-orders/{productOrder}', [ProductOrderController::class, 'update'])->name('product-orders.update');
     Route::post('product-orders/{productOrder}/assing', [ProductOrderController::class, 'assing'])->name('product-orders.assign');
     Route::post('product-orders/{productOrder}/delivered', [ProductOrderController::class, 'delivered'])->name('product-orders.delivered');
-    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'noteliver'])->name('product-orders.not-deliver');
+    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'notDeliver'])->name('product-orders.not-deliver');
 
+    //user route
+    Route::get('users/{user}/change-password', [UserController::class, 'changePasswordShow'])->name('users.changePasswordShow');
+    Route::post('users/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 });
 
 Route::group(['middleware' => ['role:delivery_agent|user|admin']], function () {
@@ -108,6 +111,10 @@ Route::group(['middleware' => ['role:delivery_agent|user|admin']], function () {
     Route::get('delivery-agent/search', [DeliveryAgentController::class, 'search'])->name('delivery-agent.search');
     Route::get('product-orders/{productOrder}/show', [ProductOrderController::class, 'show'])->name('product-orders.show');
     Route::post('product-orders/{productOrder}/delivered', [ProductOrderController::class, 'delivered'])->name('product-orders.delivered');
-    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'noteliver'])->name('product-orders.not-deliver');
+    Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'notDeliver'])->name('product-orders.not-deliver');
     Route::post('product-orders/{productOrder}/comments', [CommentController::class, 'store'])->name('comments.store');
+    
+    //user route
+    Route::get('users/{user}/change-password', [UserController::class, 'changePasswordShow'])->name('users.changePasswordShow');
+    Route::post('users/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 });

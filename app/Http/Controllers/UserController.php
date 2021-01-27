@@ -41,7 +41,15 @@ class UserController extends Controller
     public function changePassword(ChangePasswordRequest $request, User $user)
     {
         if (Hash::check($request->current, Auth::user()->password)) {
-            $user->update(['password' => Hash::make($request->password)]);
+            if (Auth::user()->hasRole(['admin'])) {
+                $user->update(['password' => Hash::make($request->password)]);
+            } else {
+                if ($user->id == Auth::user()->id) {
+                    $user->update(['password' => Hash::make($request->password)]);
+                } else {
+                    return redirect()->back()->with('error', "You can your password only!");
+                }
+            }
             return redirect()->back()->with('success', "Password change successfull");
         } else {
             return redirect()->back()->with('error', "Incorrect your current password");
@@ -69,10 +77,9 @@ class UserController extends Controller
             if ($request->email != null)
                 $users = $users->where('email', 'LIKE', ["$request->email%"]);
         }
-        if ($request->has('role'))
-         {
+        if ($request->has('role')) {
             if ($request->role != null)
-            $users = $users->role($request->role);
+                $users = $users->role($request->role);
         }
         $users = $users->paginate();
         $branches = Branch::get();
