@@ -250,7 +250,7 @@ class ProductOrderController extends Controller
                 $productOrders = $productOrders->whereBetween('date', [$request->from,$request->to]);
             }
         }
-        $productOrders = $productOrders->paginate(20);
+        $productOrders = $productOrders->paginate();
         $cities = City::get(['id', 'name', 'provinces']);
         $branches = Branch::get(['id', 'name']);
         $customers = Customer::get(['id', 'name', 'contact']);

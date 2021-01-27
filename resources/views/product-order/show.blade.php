@@ -87,6 +87,9 @@ Product Order
                             <b> Address : </b> {{$productOrder->city->provinces}},
                             {{$productOrder->city->name}}, {{$productOrder->address}}
                         </div>
+                        <div class="col-md-3">
+                            <b> Email : </b> {{$productOrder->email}}
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset class="border p-2">

@@ -97,7 +97,7 @@ class BranchController extends Controller
             if ($request->name != null)
                 $branches = $branches->where('name', 'LIKE', ["$request->name%"]);
         }
-        $branches=$branches->paginate(20);
+        $branches=$branches->paginate();
         $branch=null;
         if (!$branch) {
             $branch = new Branch;

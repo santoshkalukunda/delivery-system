@@ -39,10 +39,11 @@ class HomeController extends Controller
             $notDeliver = ProductOrder::where('status', 'not-delivered')->where('branch_id',Auth::user()->branch->id)->count();
             return view('home',compact('confirm','shipping','delivered','notDeliver'));
         } else {
-            $productOrders = ProductOrder::with('city')->where('status', 'shipping')->Where('user_id', Auth::user()->id)->get();
-            $delivered = ProductOrder::where('status', 'delivered')->Where('user_id', Auth::user()->id)->count();
-            $notDeliver = ProductOrder::where('status', 'not-delivered')->Where('user_id', Auth::user()->id)->count();
-            return view('home', compact('productOrders','delivered','notDeliver'));
+            return redirect()->route('delivery-agent.index');
+            // $productOrders = ProductOrder::with('city')->where('status', 'shipping')->Where('user_id', Auth::user()->id)->latest()->paginate(20);
+            // $delivered = ProductOrder::where('status', 'delivered')->Where('user_id', Auth::user()->id)->count();
+            // $notDeliver = ProductOrder::where('status', 'not-delivered')->Where('user_id', Auth::user()->id)->count();
+            // return view('home', compact('productOrders','delivered','notDeliver'));
         }
     }
 }

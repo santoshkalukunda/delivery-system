@@ -74,7 +74,7 @@ class UserController extends Controller
             if ($request->role != null)
             $users = $users->role($request->role);
         }
-        $users = $users->paginate(20);
+        $users = $users->paginate();
         $branches = Branch::get();
         $roles = Role::get();
         return view('user.index', compact('users', 'branches', 'roles'));

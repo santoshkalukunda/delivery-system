@@ -45,10 +45,10 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::resource('customers', CustomerController::class);
 
     //product_orders route
+    Route::get('product-orders', [ProductOrderController::class, 'index'])->name('product-orders.index');
     Route::get('product-orders/search', [ProductOrderController::class, 'search'])->name('product-orders.search');
     Route::get('product-orders/{customer}', [ProductOrderController::class, 'create'])->name('product-orders.create');
     Route::post('product-orders/{customer}', [ProductOrderController::class, 'store'])->name('product-orders.store');
-    Route::get('product-orders', [ProductOrderController::class, 'index'])->name('product-orders.index');
     Route::delete('product-orders/{productOrder}', [ProductOrderController::class, 'destroy'])->name('product-orders.destroy');
     Route::get('product-orders/{productOrder}/show', [ProductOrderController::class, 'show'])->name('product-orders.show');
     Route::get('product-orders/{productOrder}/edit', [ProductOrderController::class, 'edit'])->name('product-orders.edit');
@@ -59,8 +59,8 @@ Route::group(['middleware' => ['role:admin']], function () {
     // Route::resource('product-orders', ProductOrderController::class);
     
     //user route
-    Route::get('users/search',[UserController::class,'search'])->name('users.search');
     Route::get('users',[UserController::class,'index'])->name('users.index');
+    Route::get('users/search',[UserController::class,'search'])->name('users.search');
     Route::delete('users/{user}',[UserController::class,'destroy'])->name('users.destroy');
     Route::get('users/{user}',[UserController::class,'edit'])->name('users.edit');
     Route::post('users/{user}',[UserController::class,'update'])->name('users.update');
@@ -78,7 +78,8 @@ Route::group(['middleware' => ['role:user|admin']], function () {
 
 Route::group(['middleware' => ['role:delivery_agent|user|admin']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    // Route::get('delivery-agent',[DeliveryAgentController::class,'index'])->name('delivery-agent.index');
+    Route::get('delivery-agent',[DeliveryAgentController::class,'index'])->name('delivery-agent.index');
+    Route::get('delivery-agent/search',[DeliveryAgentController::class,'search'])->name('delivery-agent.search');
     Route::get('product-orders/{productOrder}/show', [ProductOrderController::class, 'show'])->name('product-orders.show');
     Route::post('product-orders/{productOrder}/delivered', [ProductOrderController::class, 'delivered'])->name('product-orders.delivered');
     Route::post('product-orders/{productOrder}/not-deliver', [ProductOrderController::class, 'noteliver'])->name('product-orders.not-deliver');

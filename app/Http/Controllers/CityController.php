@@ -101,7 +101,7 @@ class CityController extends Controller
             if ($request->name != null)
                 $cities = $cities->where('name', 'LIKE', ["$request->name%"]);
         }
-        $cities=$cities->paginate(20);
+        $cities=$cities->paginate();
         $city=null;
         if (!$city) {
             $city = new City;

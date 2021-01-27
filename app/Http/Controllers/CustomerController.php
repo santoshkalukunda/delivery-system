@@ -138,7 +138,7 @@ class CustomerController extends Controller
             if ($request->address != null)
             $customers = $customers->where('address', 'LIKE', ["$request->address%"]);
         }
-        $customers = $customers->paginate(20);
+        $customers = $customers->paginate();
         $cities=City::get();
         return view('customer.index', compact('customers','cities'));
     }
