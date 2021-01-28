@@ -1,6 +1,6 @@
 <!-- START HEADER-->
 <header class="header">
-    <div class="page-brand bg-primary">
+    <div class="page-brand" style="background-color: #da8762;">
         <a class="link" href="/">
             <span class="brand">
                 {{-- ClosetNepal <span class="brand-tip"> Delivery</span> --}}

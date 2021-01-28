@@ -37,8 +37,8 @@ class UsersSeeder extends Seeder
         $deliveryAgegent = Role::create(['name' => 'delivery_agent']);
         $user = User::create([
             'branch_id' => 1,
-            'name' => 'Delivery Agegent',
-            'email' => 'delivery_agegent@gmail.com',
+            'name' => 'Delivery Agent',
+            'email' => 'delivery_agent@gmail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
         $user->assignRole($deliveryAgegent);

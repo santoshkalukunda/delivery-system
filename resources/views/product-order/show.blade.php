@@ -81,10 +81,10 @@ Product Order
                         <div class="col-md-2">
                             <b> Price : </b> {{$productOrder->price}}
                         </div>
-                        <div class="col-md-2">
-                            <b> Payment Status : </b> {{$productOrder->payment_status}}
-                        </div>
                         <div class="col-md-3">
+                            <b> Payment Status : </b> {{$productOrder->payment_status ? 'Paid' : 'COD'}}
+                        </div>
+                        <div class="col-md-2">
                             <b> Status : </b>
                             @if ($productOrder->status=="confirm")
                             <span class="bg-primary px-2 py-1 text-white badge-pill">{{$productOrder->status}}</span>

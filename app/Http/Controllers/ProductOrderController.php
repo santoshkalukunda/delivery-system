@@ -270,4 +270,12 @@ class ProductOrderController extends Controller
         $customers = Customer::get(['id', 'name', 'contact']);
         return view('product-order.index', compact('productOrders', 'cities', 'branches', 'customers', 'users'));
     }
+
+    public function client(Request $request){
+        $request->validate([
+            'product_order_id' => 'required|exists:product_orders,id',
+        ]); 
+        $product_order=ProductOrder::findOrFail($request->product_order_id);
+        return view('client.index',compact('product_order'));
+    }
 }

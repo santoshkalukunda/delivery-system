@@ -32,7 +32,7 @@
                                 <td>{{$productOrder->branch->name}}</td>
                                 <td>{{$productOrder->product_name}}, {{$productOrder->code}}</td>
                                 <td>{{$productOrder->quantity}}</td>
-                                <td>{{$productOrder->price}} {{$productOrder->payment_status}}</td>
+                                <td>{{$productOrder->price}} {{$productOrder->payment_status ? 'Paid' : 'COD'}}</td>
                                 <td>{{$productOrder->customer->name}}, {{$productOrder->customer->contact}}</td>
                                 <td>{{$productOrder->name}}, {{$productOrder->contact}}</td>
                                 <td>{{$productOrder->address}}, {{$productOrder->city->name}} <span  class="text-secondary">{{$productOrder->city->provinces}}</span></td>

@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <div>
-                                <button type="submit" class="btn btn-primary form-control">
+                                <button type="submit" class="btn btn-primary  form-control badge-pill">
                                     {{ __('Login') }}
                                 </button>
                             </div>

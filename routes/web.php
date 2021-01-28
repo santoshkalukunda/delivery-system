@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('order', [ProductOrderController::class, 'client'])->name('product-orders.client');
 
 Auth::routes();
 Route::group(['middleware' => ['role:admin']], function () {
@@ -118,3 +119,4 @@ Route::group(['middleware' => ['role:delivery_agent|user|admin']], function () {
     Route::get('users/{user}/change-password', [UserController::class, 'changePasswordShow'])->name('users.changePasswordShow');
     Route::post('users/{user}/change-password', [UserController::class, 'changePassword'])->name('users.changePassword');
 });
+
