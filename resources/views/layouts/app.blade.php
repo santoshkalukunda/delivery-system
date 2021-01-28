@@ -8,11 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Closet Nepal Delivery System</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link type="image/x-icon" href="{{asset('assets/img/icon.png')}}" rel="shortcut icon" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -30,7 +30,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -84,11 +84,19 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
-        <main class="py-4">
+        <main class="my-5 py-4">
             @yield('content')
         </main>
+    </div>
+    <div class="flex justify-center mt-4 sm:items-center sm:justify-between fixed-bottom mb-3">
+        <div class="ml-4 text-center text-sm  sm:text-right sm:ml-0">
+            <div class="font-13 text-dark">{{date('Y')}} © <a href="https://closetnepal.com.np" target="_blank"
+                    class="font-bold"><b>Closet Nepal</b></a> - All rights reserved. Powered By : <a
+                    href="http://kalukunda.com.np" target="_blank" rel="noopener noreferrer"><b>Santosh
+                        Kalukunda</b></a></div>
+        </div>
     </div>
 </body>
 <!-- JQuery -->

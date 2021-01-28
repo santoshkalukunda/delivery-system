@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,8 +7,9 @@
                 <div class="card-header">{{ __('Login') }}</div>
                 <div class="card-body">
                     <div class="text-center mb-4">
-                        <i class="fa fa-user-lock fa-5x"></i>
-                        {{-- <img src="{{asset('assets/img/lock.png')}}" alt="lock" height="80"> --}}
+                        {{-- <i class="fa fa-user-lock fa-5x"></i> --}}
+                        <img src="{{asset('assets/img/logo.png')}}" class="" width="50%" alt="closet Nepal Logo">
+                        
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

@@ -1,11 +1,13 @@
 <!-- START HEADER-->
 <header class="header">
-    <div class="page-brand">
+    <div class="page-brand bg-primary">
         <a class="link" href="/">
-            <span class="brand">ClosetNepal
-                <span class="brand-tip"> Delivery</span>
+            <span class="brand">
+                {{-- ClosetNepal <span class="brand-tip"> Delivery</span> --}}
+                <img src="{{asset('assets/img/logo.png')}}" class="" width="80%" alt="closet Nepal Logo">
             </span>
             <span class="brand-mini">CND</span>
+
         </a>
     </div>
     <div class="flexbox flex-1">

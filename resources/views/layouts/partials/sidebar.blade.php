@@ -17,18 +17,19 @@
                     <span class="nav-label">Customers</span></a>
             </li>
             <li>
-                <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-code-branch"></i>
-                    <span class="nav-label">Branches</span></a>
-            </li>
-            <li>
                 <a href="{{route('cities.index')}}"><i class="sidebar-item-icon fa fa-map-marker"></i>
                     <span class="nav-label">Cities</span></a>
             </li>
             <li>
+                <a href="{{route('branches.index')}}"><i class="sidebar-item-icon fa fa-code-branch"></i>
+                    <span class="nav-label">Branches</span></a>
+            </li>
+            
+            <li>
                 <a href="{{route('users.index')}}"><i class="sidebar-item-icon fa fa-users"></i>
                     <span class="nav-label">Users</span></a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
                     <span class="nav-label">Basic UI</span><i class="fa fa-angle-left arrow"></i></a>
                 <ul class="nav-2-level collapse">
@@ -40,7 +41,7 @@
                     </li>
 
                 </ul>
-            </li>
+            </li> --}}
 
         </ul>
     </div>
