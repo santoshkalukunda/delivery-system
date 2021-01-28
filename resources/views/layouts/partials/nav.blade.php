@@ -7,7 +7,6 @@
                 <img src="{{asset('assets/img/logo.png')}}" class="" width="80%" alt="closet Nepal Logo">
             </span>
             <span class="brand-mini">CND</span>
-
         </a>
     </div>
     <div class="flexbox flex-1">

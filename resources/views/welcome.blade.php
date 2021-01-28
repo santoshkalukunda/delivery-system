@@ -4,9 +4,9 @@
     <form action="{{route('product-orders.client')}}" method="get">
         <div class="row justify-content-center py-5">
             <div class="text-center my-5">
-                <a href="">
+                
                     <img src="{{asset('assets/img/logo.png')}}" class="" width="40%" alt="closet Nepal Logo">
-                </a>
+               
             </div>
             <div class="col-md-5 form-group">
                 <input type="text" class="form-control" name="product_order_id" placeholder="Order Number" autofocus>
