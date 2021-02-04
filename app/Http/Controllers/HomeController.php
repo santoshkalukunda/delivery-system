@@ -29,7 +29,7 @@ class HomeController extends Controller
             $confirm = ProductOrder::where('status', 'confirm')->count();
             $shipping = ProductOrder::where('status', 'shipping')->count();
             $delivered = ProductOrder::where('status', 'delivered')->count();
-            $notDeliver = ProductOrder::where('status', 'not-delivered')->count();
+            $notDeliver = ProductOrder::where('status', 'not-deliver')->count();
             $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch')->latest()->paginate(20);
             return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders'));
         } elseif (Auth::user()->hasRole(['user'])) {

@@ -74,7 +74,7 @@ class DeliveryAgentController extends Controller
         $users = User::findOrFail(Auth::user()->id);
         $productOrders = $productOrders->where('user_id',$users->id)->latest()->paginate();
         $delivered = $users->productOrder()->where('status', 'delivered')->count();
-        $notDeliver = $users->productOrder()->where('status', 'not-delivered')->count();
+        $notDeliver = $users->productOrder()->where('status', 'not-deliver')->count();
         $cities = City::get(['id', 'name', 'provinces']);
         return view('home', compact('productOrders', 'delivered', 'notDeliver', 'cities'));
     }
