@@ -157,7 +157,7 @@ class ProductOrderController extends Controller
         ]);
         $productOrder->update([
             'user_id' => Auth::user()->id,
-            'payment_status' => true,
+            // 'payment_status' => true,
             'status' => 'delivered',
         ]);
 
@@ -176,7 +176,7 @@ class ProductOrderController extends Controller
         ]);
         $productOrder->update([
             'user_id' => Auth::user()->id,
-            'payment_status' => false,
+            // 'payment_status' => false,
             'status' => 'not-deliver',
         ]);
         $data = "<b class='text-danger'>Not-Delivered</b>. <br>" . $request->message;
