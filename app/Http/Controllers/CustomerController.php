@@ -112,7 +112,7 @@ class CustomerController extends Controller
         if($customer){
             return redirect()->route('customers.show', $customer);
         }
-        return $this->create($customer,$request->contact);
+        return redirect()->route('customers.create');
     }
 
     public function search(Request $request)
