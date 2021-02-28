@@ -81,6 +81,7 @@ Route::group(['middleware' => ['role:user|admin']], function () {
     Route::put('cities/{city}', [CityController::class, 'update'])->name('cities.update');
     //customer route
     Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('customers/create', [CustomerController::class, 'create'])->name('customers.create');
     Route::post('customers/find', [CustomerController::class, 'find'])->name('customers.find');
     Route::get('customers/search', [CustomerController::class, 'search'])->name('customers.search');
     Route::post('customers', [CustomerController::class, 'store'])->name('customers.store');
