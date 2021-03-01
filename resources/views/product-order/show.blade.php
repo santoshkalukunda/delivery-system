@@ -10,15 +10,14 @@ Product Order
                 <div class="ibox-title">Product Order Status</div>
             </div>
             <div class="ibox-body">
-                @if ($productOrder->status == "confirm" OR $productOrder->status =="shipping")
+           
                     @if (Auth::user()->hasRole(['admin']))
                         @include('product-order.show-form-button')
                     @else
-                        @if ($productOrder->branch_id == Auth::user()->branch_id)
+                        @if ($productOrder->branch_id == Auth::user()->branch_id && $productOrder->status == "confirm" OR $productOrder->status =="shipping")
                             @include('product-order.show-form-button')
                         @endif
                     @endif
-                @endif
                 <fieldset class="border p-2">
                     <legend class="w-auto font-15">Sender Details</legend>
                     <div class="row">
