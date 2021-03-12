@@ -20,6 +20,7 @@
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script src="{{asset('assets/js/script.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/nepali-datepicker/js/nepali.datepicker.v3.5.min.js')}}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw==" crossorigin="anonymous"></script>
 
 @livewireScripts
 @stack('scripts')

@@ -100,7 +100,7 @@ Product Order
                             <div class="row">
                                 <div class="col-md-4 form-group">
                                     <label for="date" class="required">Order Date</label>
-                                    <input type="date" name="date"
+                                    <input type="text" name="date"
                                         class="form-control @error('date') is-invalid @enderror" id="date"
                                         value="{{old('date',$productOrder->date)}}">
                                     @error('date')
@@ -238,4 +238,15 @@ Product Order
         </div>
     </div>
 </div>
+@push('scripts')
+<script type="text/javascript">
+var mainInput = document.getElementById("date");
+ /* Initialize Datepicker with options */
+ mainInput.nepaliDatePicker({
+     ndpYear: true,
+     ndpMonth: true,
+     ndpYearCount: 100
+ });
+</script>
+@endpush
 @endsection

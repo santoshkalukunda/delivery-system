@@ -214,7 +214,7 @@ var mainInput = document.getElementById("date");
  mainInput.nepaliDatePicker({
      ndpYear: true,
      ndpMonth: true,
-     ndpYearCount: 10
+     ndpYearCount: 100
  });
 </script>
 @endpush
