@@ -17,7 +17,7 @@ Product Order List
             </a>
         </p>
     </div>
-    <div class="col-md-8 form-group text-right">
+    {{-- <div class="col-md-8 form-group text-right">
         @php
         $total = 0;
         foreach($productOrders as $productOrder)
@@ -26,7 +26,7 @@ Product Order List
         }
         @endphp
         <span class="bg-blue-light p-2"><b>Total Amount: </b>{{$total}}/-</span>
-    </div>
+    </div> --}}
   @include('product-order.filter')
 </div>
 
