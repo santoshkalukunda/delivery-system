@@ -20,14 +20,11 @@ Product Order List
     <div class="col-md-8 form-group text-right">
         @php
         $total = 0;
-        $quantity = 0;
         foreach($productOrders as $productOrder)
         {
         $total = $total+$productOrder->price;
-        // $quantity = $quantity + $productOrder->quantity;
         }
         @endphp
-        {{-- <span class="bg-blue-light p-2"><b>Total Product: </b>{{$quantity}}</span> --}}
         <span class="bg-blue-light p-2"><b>Total Amount: </b>{{$total}}/-</span>
     </div>
   @include('product-order.filter')
