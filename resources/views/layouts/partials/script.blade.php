@@ -19,5 +19,7 @@
     crossorigin="anonymous"></script>
 <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 <script src="{{asset('assets/js/script.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/nepali-datepicker/js/nepali.datepicker.v3.5.min.js')}}" type="text/javascript"></script>
+
 @livewireScripts
 @stack('scripts')

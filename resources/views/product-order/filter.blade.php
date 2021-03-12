@@ -23,8 +23,8 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">City</label>
-                        <select class="selectpicker form-control @error('city_id') is-invalid @enderror"
-                            name="city_id" id="city" data-live-search="true" data-size="5">
+                        <select class="selectpicker form-control @error('city_id') is-invalid @enderror" name="city_id"
+                            id="city" data-live-search="true" data-size="5">
                             <option value="" selected>Select City</option>
                             @foreach ($cities as $city)
                             <option value="{{$city->id}}" data-subtext="{{$city->provinces}}"> {{$city->name}}
@@ -34,8 +34,7 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">User</label>
-                        <select class="selectpicker form-control " name="user_id" data-live-search="true"
-                            data-size="5">
+                        <select class="selectpicker form-control " name="user_id" data-live-search="true" data-size="5">
                             <option value="" selected>Select User</option>
                             @foreach ($users as $user)
                             <option value="{{$user->id}}" data-subtext="{{$user->branch->name}}"> {{$user->name}}
@@ -45,7 +44,8 @@
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Sender Contact</label>
-                        <select class="selectpicker form-control" name="customer_id" data-live-search="true" data-size="5">
+                        <select class="selectpicker form-control" name="customer_id" data-live-search="true"
+                            data-size="5">
                             <option value="">Select Contact</option>
                             @foreach ($customers as $customer)
                             <option value="{{$customer->id}}" data-subtext="{{$customer->name}}">
@@ -79,11 +79,11 @@
 
                     <div class="col-md-3 form-group">
                         <label for="">Order Date From</label>
-                        <input type="date" class=" form-control" name="from">
+                        <input type="text" class=" form-control" id="from" name="from" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Order Date to</label>
-                        <input type="date" class=" form-control" name="to" value="">
+                        <input type="text" class=" form-control" name="to" id="to" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="col-md-3 form-group">
                         <label for="">Product Name</label>
@@ -95,12 +95,14 @@
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="">Minimum Quantity</label>
-                        <input type="number" min="0" class=" form-control" name="min_quantity" placeholder="Quantity Min.">
-                        
+                        <input type="number" min="0" class=" form-control" name="min_quantity"
+                            placeholder="Quantity Min.">
+
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="">Maximum Quantity</label>
-                        <input type="number" min="0" class=" form-control" name="max_quantity" placeholder="Quantity Max.">
+                        <input type="number" min="0" class=" form-control" name="max_quantity"
+                            placeholder="Quantity Max.">
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="">Minimum Price</label>
@@ -139,3 +141,23 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script type="text/javascript">
+    var mainInput = document.getElementById("from");
+ 
+ /* Initialize Datepicker with options */
+ mainInput.nepaliDatePicker({
+     ndpYear: true,
+     ndpMonth: true,
+     ndpYearCount: 50
+ });
+ 
+   var mainInput = document.getElementById("to");
+ /* Initialize Datepicker with options */
+ mainInput.nepaliDatePicker({
+     ndpYear: true,
+     ndpMonth: true,
+     ndpYearCount: 50
+ });
+</script>
+@endpush

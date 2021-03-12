@@ -2,7 +2,7 @@
 @section('title')
 Product Order
 @endsection
-@section('content')
+@section('content')    
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox">
@@ -96,8 +96,8 @@ Product Order
                         <div class="row">
                             <div class="col-md-4 form-group">
                                 <label for="date" class="required">Order Date</label>
-                                <input type="date" name="date"
-                                    class="form-control @error('date') is-invalid @enderror" id="date" value="{{old('date')}}">
+                                <input type="text" name="date" class="form-control @error('date') is-invalid @enderror"
+                                    id="date" value="{{old('date')}}" placeholder="YYYY-MM-DD">
                                 @error('date')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -179,34 +179,6 @@ Product Order
                                 </div>
                                 @enderror
                             </div>
-                            {{-- <div class="col-md-4 form-group">
-                                <label for="payment_status" class="required">Status</label>
-                                <select type="number" name="status"
-                                    class="form-control @error('status') is-invalid @enderror" id="status">
-                                    <option value="confirm">Confirm</option>
-                                    <option value="shipping">Shipping</option>
-                                    <option value="delivered">Delivered</option>
-                                    <option value="not-deliver">Not-Deliver</option>
-                                </select>
-                                @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div> --}}
-                            {{-- <div class="col-md-4 form-group">
-                                <label for="user_id">Delivery Agent</label>
-                                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
-                                    id="user_id">
-                                    <option value="" selected>Select Delivery Agent</option>
-                                   
-                                </select>
-                                @error('branch_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div> --}}
                             <div class="col-md-12 form-group">
                                 <label for="details">Product details</label>
                                 <textarea type="text" name="details"
@@ -235,5 +207,15 @@ Product Order
 
 {{-- listing product orders history --}}
 @include('product-order.product-list')
-
+@push('scripts')
+<script type="text/javascript">
+var mainInput = document.getElementById("date");
+ /* Initialize Datepicker with options */
+ mainInput.nepaliDatePicker({
+     ndpYear: true,
+     ndpMonth: true,
+     ndpYearCount: 10
+ });
+</script>
+@endpush
 @endsection
