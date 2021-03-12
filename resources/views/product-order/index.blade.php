@@ -9,6 +9,27 @@ Product Order List
             data-target="#findCustomerModal"> <i class="fa fa-plus"></i> New Order
         </button>
     </div>
+    <div class="col-md-2">
+        <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#filter" role="button" aria-expanded="false"
+                aria-controls="filter">
+                <i class="fa fa-filter"></i> Filter
+            </a>
+        </p>
+    </div>
+    <div class="col-md-8 form-group text-right">
+        @php
+        $total=0;
+        $quantity=0;
+        foreach($productOrders as $productOrder)
+        {
+        $total=$total+$productOrder->price;
+        $quantity=$quantity+$productOrder->quantity;
+        }
+        @endphp
+        <span class="bg-blue-light p-2"><b>Total Product: </b>{{$quantity}}</span>
+        <span class="bg-blue-light p-2"><b>Total Amount: </b>{{$total}}/-</span>
+    </div>
   @include('product-order.filter')
 </div>
 
