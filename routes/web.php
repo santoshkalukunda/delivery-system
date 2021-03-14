@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 Route::get('order', [ProductOrderController::class, 'client'])->name('product-orders.client');
 
 Auth::routes();

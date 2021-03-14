@@ -9,7 +9,12 @@
                
             </div>
             <div class="col-md-5 form-group">
-                <input type="text" class="form-control" name="product_order_id" placeholder="Order Number" autofocus>
+                <input type="text" class="form-control @error('product_order_id') is-invalid @enderror"" name="product_order_id" placeholder="Order Number" autofocus>
+                @error('product_order_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="col-md-1 form-group">
                 <input type="submit" value="Search" class="btn-md btn-primary form-control badge-pill px-3">

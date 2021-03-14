@@ -27,10 +27,32 @@ class UserController extends Controller
         return view('user.edit', compact('branches', 'roles', 'user'));
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        $data = $request->validated();
-        $user->update($data);
+        if ($request->email == $user->email) {
+            $request->validate([
+                'branch_id' => ['required'],
+                'name' => 'required',
+                'role' => 'required',
+            ]);
+            $data = $request->all();
+            $user->update([
+                'name' => $data['name'],
+            ]);
+        } else {
+            $request->validate([
+                'branch_id' => 'required',
+                'name' => 'required',
+                'email' => 'required|unique:users,email|email',
+                'role' => 'required',
+            ]);
+
+            $data = $request->all();
+            $user->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+            ]);
+        }
         $user->syncRoles($data['role']);
         return redirect()->back()->with('success', 'User Updated.');
     }

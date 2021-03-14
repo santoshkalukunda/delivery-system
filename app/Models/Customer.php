@@ -5,12 +5,13 @@ namespace App\Models;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
     use HasFactory;
-    use Uuid;          
+    use Uuid;    
+    use Notifiable;      
     
     /**
      * The "type" of the auto-incrementing ID.

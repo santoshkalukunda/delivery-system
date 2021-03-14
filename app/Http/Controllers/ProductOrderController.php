@@ -9,8 +9,12 @@ use App\Models\Comment;
 use App\Models\Customer;
 use App\Models\ProductOrder;
 use App\Models\User;
+use App\Notifications\AssingNotification;
+use App\Notifications\DeliveredNotification;
+use App\Notifications\ProductConfirmNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class ProductOrderController extends Controller
 {
@@ -63,6 +67,11 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => "<b class='text-success'>Product Order Created</b>. <br>",
         ]);
+
+
+        Notification::send($customer, new ProductConfirmNotification($customer,$product_order));
+
+
         $customer = Customer::where('contact', $request->contact)->first();
         if (!$customer) {
             $customer = Customer::create([
@@ -85,7 +94,6 @@ class ProductOrderController extends Controller
      */
     public function show(ProductOrder $productOrder)
     {
-        // $users = User::where('branch_id', $productOrder->branch_id)->role('delivery_agent')->get();
         $users = User::where('branch_id', $productOrder->branch_id)->get();
         $comments = $productOrder->comment()->with('user')->latest()->get();
         return view('product-order.show', compact('productOrder', 'users', 'comments'));
@@ -146,7 +154,8 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => $data,
         ]);
-
+    
+        Notification::send($user, new AssingNotification($user,$productOrder,$comment));
         return redirect()->route('product-orders.show', $productOrder)->with('success', 'Product assigned.');
     }
 
@@ -167,6 +176,8 @@ class ProductOrderController extends Controller
             'user_id' => Auth::user()->id,
             'message' => $data,
         ]);
+        $user = User::findOrFail(Auth::user()->id);
+        Notification::send($user, new DeliveredNotification($user, $productOrder, $comment));
         return redirect()->route('product-orders.show', $productOrder)->with('success', 'Product Delivered.');
     }
     public function notDeliver(Request $request, ProductOrder $productOrder)
@@ -258,13 +269,6 @@ class ProductOrderController extends Controller
         }
         $productOrders = $productOrders->paginate();
         $users = User::with('branch')->get(['id', 'name', 'branch_id']);
-        // if (Auth::user()->hasRole(['admin'])) {
-        //     $productOrders = $productOrders->paginate();
-        //     $users = User::with('branch')->get(['id', 'name', 'branch_id']);
-        // } else {
-        //     $productOrders = $productOrders->where('branch_id', Auth::user()->branch_id)->paginate();
-        //     $users = User::with('branch')->where('branch_id', Auth::user()->branch_id)->get(['id', 'name', 'branch_id']);
-        // }
         $cities = City::get(['id', 'name', 'provinces']);
         $branches = Branch::get(['id', 'name']);
         $customers = Customer::get(['id', 'name', 'contact']);

@@ -45,8 +45,8 @@ class HomeController extends Controller
                 $date[$i]->subDay($i); // Subtracts 1 day
                 $date[$i] = date("Y-m-d", strtotime($date[$i]));
                 $totalIncome[$i] = 0;
-                foreach ($produdctOrederDelivereds as $produdct_Oreder) {
-                    $totalIncome[$i] = $totalIncome[$i] + $produdct_Oreder->price;
+                foreach ($produdctOrederDelivereds as $produdct_Order) {
+                    $totalIncome[$i] = $totalIncome[$i] + $produdct_Order->price;
                 }
             }
 
