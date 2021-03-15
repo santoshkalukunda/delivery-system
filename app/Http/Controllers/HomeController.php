@@ -245,40 +245,40 @@ class HomeController extends Controller
                     ],
                 ])
                 ->options([]);
-            $j=2;
+            $j = 1;
             for ($i = 0; $i < 12; $i++) {
-                $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->whereBetween('date', [Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($j), Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i)])->get();
-               $j++;
-                $month[$i] = Carbon::createFromFormat('Y-m-d', $currentdate);
-                $month[$i]->subMonths($i); // Subtracts 1 day
-                $month[$i] = date("Y-m", strtotime($month[$i]));
+                $date1 = Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i);
+                $date2 = Carbon::createFromFormat('Y-m-d', $currentdate)->addMonths($j);
+                $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->whereBetween('date', [$date1->format('Y-m'), $date2->format('Y-m')])->get();
+                $month[$i] = $date1->format('Y-m');
                 $monthTotalIncome[$i] = 0;
                 foreach ($monthprodudctOrederDelivereds as $produdct_Oreder) {
                     $monthTotalIncome[$i] = $monthTotalIncome[$i] + $produdct_Oreder->price;
                 }
+                $j--;
+                // return  $date2;
             }
-
             $monthIncome = app()->chartjs
-            ->name('monthincome')
-            ->type('line')
-            ->size(['width' => 400, 'height' => 100])
-            ->labels(array_reverse($month))
-            ->datasets([
-                [
-                    "label" => "Total Sales",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => array_reverse($monthTotalIncome),
-                ],
-            ])
-            ->options([]);
+                ->name('monthincome')
+                ->type('line')
+                ->size(['width' => 400, 'height' => 100])
+                ->labels(array_reverse($month))
+                ->datasets([
+                    [
+                        "label" => "Total Sales",
+                        'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                        'borderColor' => "rgba(38, 185, 154, 0.7)",
+                        "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                        "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                        "pointHoverBackgroundColor" => "#fff",
+                        "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                        'data' => array_reverse($monthTotalIncome),
+                    ],
+                ])
+                ->options([]);
 
             $productOrders = ProductOrder::with('customer', 'city', 'user', 'branch',)->latest()->paginate(20);
-            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders', 'chartjs', 'income','monthIncome'));
+            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders', 'chartjs', 'income', 'monthIncome'));
         } elseif (Auth::user()->hasRole(['user'])) {
             $confirm = $productOrders->where('status', 'confirm')->where('branch_id', Auth::user()->branch->id)->count();
             $shipping = $productOrders->where('status', 'shipping')->where('branch_id', Auth::user()->branch->id)->count();
@@ -286,10 +286,10 @@ class HomeController extends Controller
             $notDeliver = $productOrders->where('status', 'not-deliver')->where('branch_id', Auth::user()->branch->id)->count();
 
             for ($i = 0; $i < 30; $i++) {
-                $produdctOrederConfirm[$i] = $productOrders->where('status', 'confirm')->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
-                $produdctOrederShipping[$i] = $productOrders->where('status', 'shipping')->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
-                $produdctOrederDelivereds = $productOrders->where('status', 'delivered')->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->get();
-                $produdctOrederNotDelivere[$i] = $productOrders->where('status', 'not-deliver')->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
+                $produdctOrederConfirm[$i] = $productOrders->where('status', 'confirm')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
+                $produdctOrederShipping[$i] = $productOrders->where('status', 'shipping')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
+                $produdctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->get();
+                $produdctOrederNotDelivere[$i] = $productOrders->where('status', 'not-deliver')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
                 $produdctOrederDelivered[$i] = $produdctOrederDelivereds->count();
                 // $billNetTotals = $bill_obj->where('status', 'complete')->whereDate('date', today()->subDays($i))->get();
                 $date[$i] = Carbon::createFromFormat('Y-m-d', $currentdate);
@@ -496,20 +496,19 @@ class HomeController extends Controller
                 ])
                 ->options([]);
 
-                $j=2;
-                for ($i = 0; $i < 12; $i++) {
-                    $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch_id)->whereBetween('date', [Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($j), Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i)])->get();
-                   $j++;
-                    $month[$i] = Carbon::createFromFormat('Y-m-d', $currentdate);
-                    $month[$i]->subMonths($i); // Subtracts 1 day
-                    $month[$i] = date("Y-m", strtotime($month[$i]));
-                    $monthTotalIncome[$i] = 0;
-                    foreach ($monthprodudctOrederDelivereds as $produdct_Oreder) {
-                        $monthTotalIncome[$i] = $monthTotalIncome[$i] + $produdct_Oreder->price;
-                    }
+            $j = 1;
+            for ($i = 0; $i < 12; $i++) {
+                $date1 = Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i);
+                $date2 = Carbon::createFromFormat('Y-m-d', $currentdate)->addMonths($j);
+                $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->whereBetween('date', [$date1->format('Y-m'), $date2->format('Y-m')])->get();
+                $month[$i] = $date1->format('Y-m');
+                $monthTotalIncome[$i] = 0;
+                foreach ($monthprodudctOrederDelivereds as $produdct_Oreder) {
+                    $monthTotalIncome[$i] = $monthTotalIncome[$i] + $produdct_Oreder->price;
                 }
-    
-                $monthIncome = app()->chartjs
+                $j--;
+
+            $monthIncome = app()->chartjs
                 ->name('monthincome')
                 ->type('line')
                 ->size(['width' => 400, 'height' => 100])
@@ -528,7 +527,7 @@ class HomeController extends Controller
                 ])
                 ->options([]);
             $productOrders = $productOrders->with('customer', 'city', 'user', 'branch')->where('branch_id', Auth::user()->branch_id)->latest()->paginate(20);
-            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders', 'chartjs', 'income','monthIncome'));
+            return view('home', compact('confirm', 'shipping', 'delivered', 'notDeliver', 'productOrders', 'chartjs', 'income', 'monthIncome'));
         } else {
             return redirect()->route('delivery-agent.index');
         }
