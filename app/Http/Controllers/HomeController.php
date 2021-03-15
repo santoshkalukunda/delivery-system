@@ -286,7 +286,7 @@ class HomeController extends Controller
             $notDeliver = $productOrders->where('status', 'not-deliver')->where('branch_id', Auth::user()->branch->id)->count();
 
             for ($i = 0; $i < 30; $i++) {
-                $produdctOrederConfirm[$i] = $productOrders->where('status', 'confirm')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
+                $produdctOrederConfirm[$i] = $productOrders->where('status', 'confirm') ->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
                 $produdctOrederShipping[$i] = $productOrders->where('status', 'shipping')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
                 $produdctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->get();
                 $produdctOrederNotDelivere[$i] = $productOrders->where('status', 'not-deliver')->where('branch_id', Auth::user()->branch->id)->whereDate('date', Carbon::createFromFormat('Y-m-d', $currentdate)->subDays($i))->count();
@@ -496,17 +496,18 @@ class HomeController extends Controller
                 ])
                 ->options([]);
 
-            $j = 1;
-            for ($i = 0; $i < 12; $i++) {
-                $date1 = Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i);
-                $date2 = Carbon::createFromFormat('Y-m-d', $currentdate)->addMonths($j);
-                $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->whereBetween('date', [$date1->format('Y-m'), $date2->format('Y-m')])->get();
-                $month[$i] = $date1->format('Y-m');
-                $monthTotalIncome[$i] = 0;
-                foreach ($monthprodudctOrederDelivereds as $produdct_Oreder) {
-                    $monthTotalIncome[$i] = $monthTotalIncome[$i] + $produdct_Oreder->price;
-                }
-                $j--;
+                $j = 1;
+                for ($i = 0; $i < 12; $i++) {
+                    $date1 = Carbon::createFromFormat('Y-m-d', $currentdate)->subMonths($i);
+                    $date2 = Carbon::createFromFormat('Y-m-d', $currentdate)->addMonths($j);
+                    $monthprodudctOrederDelivereds = $productOrders->where('status', 'delivered')->where('branch_id', Auth::user()->branch->id)->whereBetween('date', [$date1->format('Y-m'), $date2->format('Y-m')])->get();
+                    $month[$i] = $date1->format('Y-m');
+                    $monthTotalIncome[$i] = 0;
+                    foreach ($monthprodudctOrederDelivereds as $produdct_Oreder) {
+                        $monthTotalIncome[$i] = $monthTotalIncome[$i] + $produdct_Oreder->price;
+                    }
+                    $j--;
+            }
 
             $monthIncome = app()->chartjs
                 ->name('monthincome')
